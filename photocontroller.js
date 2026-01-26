@@ -80,10 +80,6 @@ LOG_LEVEL=info
 # -----------------
 # Cloud Storage (Phase 5 - ENABLED NOW!)
 # -----------------
-AWS_ACCESS_KEY_ID=AKIAWHAHCINTRPONURFA
-AWS_SECRET_ACCESS_KEY=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
-AWS_S3_BUCKET=photomanea-events
-AWS_REGION=ap-south-1
 
 
 # -----------------
