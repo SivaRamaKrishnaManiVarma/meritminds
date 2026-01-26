@@ -1,0 +1,2546 @@
+<?php include 'header.php'?>
+<style>
+    /* =========================
+       ROOT & GLOBAL
+    ==========================*/
+    :root {
+        --primary-color: #fc0511;
+        --secondary-color: #fc0511;
+        --light-color: #ffffff;
+        --dark-color: #212529;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: var(--light-color);
+    }
+
+    h1, h2, h6 {
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* =========================
+       GENERIC HEADING ANIMS
+    ==========================*/
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @keyframes fade-slide-in {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes animate-background {
+        0% { background-position: 0 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    /* Desktop vs mobile toggle between portfolio and destination */
+    @media (min-width: 768px) {
+        #study-portfolio {
+            display: block;
+        }
+        #destination-gallery {
+            display: none;
+        }
+    }
+    @media (max-width: 767px) {
+        #study-portfolio {
+            display: none;
+        }
+        #destination-gallery {
+            display: block;
+        }
+    }
+
+    /* =========================
+       HERO & LEAD FORM
+    ==========================*/
+    .hero-section {
+        padding: 40px 0;
+        background-color: var(--light-color);
+    }
+
+    .hero-image {
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-content {
+        padding: 20px;
+        position: relative;
+        z-index: 1;
+        color: white;
+        background: rgba(252, 5, 17, 0.8);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-content h1 {
+        font-weight: 700;
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        color: white;
+    }
+
+    .hero-benefits {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 15px;
+    }
+
+    .hero-benefits li {
+        padding: 8px 0;
+        font-size: 1rem;
+        position: relative;
+        padding-left: 30px;
+    }
+
+    .hero-benefits li:before {
+        content: "✓";
+        color: var(--secondary-color);
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 6px;
+        background-color: white;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-container {
+        background-color: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 2;
+    }
+
+    .free-offer {
+        background-color: var(--secondary-color);
+        color: white;
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .accommodation-text {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+
+    .location-badge {
+        background-color: var(--primary-color);
+        color: white;
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .masked-textt {
+        background-color: #f8f9fa;
+        padding: 12px;
+        border-radius: 8px;
+        font-style: italic;
+        color: #555;
+        border-left: 3px solid var(--secondary-color);
+        margin: 10px 0;
+    }
+
+    .form-title {
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    .form-subtitle-main {
+        /* renamed to avoid popup clash */
+        color: #555;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+    }
+
+    .form-control-main {
+        /* main page form only */
+        padding: 10px 12px;
+        margin-bottom: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .btn-submit-main {
+        width: 100%;
+        padding: 10px;
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-submit-main:hover {
+        background-color: #d04416;
+    }
+
+    .success-message-main {
+        padding: 12px;
+        background-color: #d4edda;
+        color: #155724;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .green-tick-main {
+        color: #28a745;
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    .contact-us-main {
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px solid #eee;
+    }
+
+    .contact-us-main a {
+        color: var(--secondary-color);
+        text-decoration: none;
+    }
+
+    .contact-us-main p {
+        margin-bottom: 6px;
+    }
+
+    @media (max-width: 991px) {
+        .hero-section {
+            padding: 30px 0;
+        }
+        .hero-image {
+            min-height: 280px;
+            margin-bottom: 20px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .hero-content h1 {
+            font-size: 1.8rem;
+        }
+        .hero-benefits li {
+            font-size: 0.95rem;
+        }
+        .form-container {
+            padding: 15px;
+        }
+    }
+
+    /* =========================
+       SLIDER
+    ==========================*/
+    .custom-slider-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        background-color: white;
+        padding: 5px 0;
+        height: 180px;
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-slider-wrapper {
+        display: flex;
+        width: max-content;
+        animation: custom-slide-animation 45s linear infinite;
+    }
+
+    .custom-slider-wrapper .custom-slide {
+        flex: 0 0 auto;
+        width: 16.66vw;
+    }
+
+    .custom-slide img {
+        width: 85%;
+        height: 140px;
+        display: block;
+        margin: auto;
+        object-fit: fill;
+        border-radius: 10px;
+        box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.2);
+        transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .custom-slide img:hover {
+        transform: scale(1.1);
+        box-shadow: 10px 25px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes custom-slide-animation {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+        .custom-slider-wrapper {
+            animation: custom-slide-animation 40s linear infinite;
+        }
+
+        .custom-slider-wrapper .custom-slide {
+            width: 50vw;
+        }
+    }
+
+    /* =========================
+       STATS STRIP
+    ==========================*/
+    .stats-section {
+        background: linear-gradient(135deg, #fc0511, #a30008);
+        padding: 30px 0;
+        color: white;
+    }
+
+    /* =========================
+       ABOUT / PROCESS / VALUES
+    ==========================*/
+    .animated-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .animated-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, #fc0511, #a30008);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 12px;
+        display: inline-block;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, #fc0511, #a30008);
+        border-radius: 2px;
+    }
+        /* Add after .section-subtitle */
+        .section-subheading {
+        font-size: 16px;
+        font-weight: 600;
+        color: #6c757d;
+        text-align: left !important;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
+        }
+
+    .section-subtitle {
+        font-size: 36px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        letter-spacing: -0.5px;
+          text-align: left !important;
+
+    }
+
+    .section-description {
+        font-size: 17px;
+        line-height: 1.7;
+        color: #4a4a4a;
+        margin-bottom: 20px;
+    }
+
+    .section-description b {
+        color: #fc0511;
+        font-weight: 600;
+    }
+
+    .scale-up {
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        position: relative;
+    }
+
+    .scale-up::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(252, 5, 17, 0.1), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 1;
+    }
+
+    .scale-up:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 60px rgba(252, 5, 17, 0.15);
+    }
+
+    .scale-up:hover::before {
+        opacity: 1;
+    }
+
+    .scale-up img {
+        transition: transform 0.6s ease;
+    }
+
+    .scale-up:hover img {
+        transform: scale(1.08);
+    }
+
+    .content-card {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: all 0.4s ease;
+    }
+
+    .content-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        border-color: rgba(252, 5, 17, 0.2);
+    }
+
+    .content-card h5 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .content-card h5::before {
+        content: '';
+        width: 4px;
+        height: 28px;
+        background: linear-gradient(180deg, #fc0511, #a30008);
+        border-radius: 2px;
+    }
+
+    .content-card p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #5a5a5a;
+        margin: 0;
+    }
+
+    .process-card {
+        background: #ffffff;
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-left: 4px solid #fc0511;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .process-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 0;
+        background: linear-gradient(180deg, #fc0511, #a30008);
+        transition: height 0.4s ease;
+    }
+
+    .process-card:hover {
+        transform: translateX(8px);
+        box-shadow: 0 8px 24px rgba(252, 5, 17, 0.12);
+    }
+
+    .process-card:hover::before {
+        height: 100%;
+    }
+
+    .process-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #fc0511, #a30008);
+        color: white;
+        border-radius: 12px;
+        margin-right: 14px;
+        font-weight: 700;
+        font-size: 18px;
+        box-shadow: 0 4px 12px rgba(252, 5, 17, 0.3);
+    }
+
+    .process-card b {
+        font-size: 17px;
+        color: #1a1a1a;
+        font-weight: 600;
+    }
+
+    .process-card p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #6a6a6a;
+        margin: 10px 0 0 54px;
+    }
+
+    .value-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff;
+        border-radius: 24px;
+        padding: 12px 20px;
+        margin: 6px;
+        font-weight: 600;
+        font-size: 15px;
+        color: #fc0511;
+        border: 2px solid #fc0511;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 8px rgba(252, 5, 17, 0.1);
+    }
+
+    .value-pill::before {
+        content: '✦';
+        font-size: 12px;
+    }
+
+    .value-pill:hover {
+        background: linear-gradient(135deg, #fc0511, #a30008);
+        color: white;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(252, 5, 17, 0.3);
+        border-color: transparent;
+    }
+
+    .equal-height {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .equal-height > div {
+        width: 100%;
+    }
+
+    .equal-height img {
+        object-fit: cover;
+        height: 280px;
+        width: 100%;
+        border-radius: 14px;
+    }
+
+    .about-img-container {
+        overflow: hidden;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+        position: relative;
+    }
+
+    .about-img-container img {
+        transition: transform 0.6s ease;
+    }
+
+    .featured-image-container img {
+        height: auto;
+        min-height: 400px;
+        object-fit: cover;
+    }
+
+    .cta-box {
+        background: linear-gradient(135deg, #fc0511 0%, #a30008 100%);
+        color: white;
+        padding: 32px;
+        border-radius: 16px;
+        text-align: center;
+        margin-top: 32px;
+        box-shadow: 0 10px 40px rgba(252, 5, 17, 0.25);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-box::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.1); opacity: 0.3; }
+    }
+
+    .cta-box p {
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-box .cta-button {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 14px 36px;
+        background: white;
+        color: #fc0511;
+        border-radius: 30px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 1;
+    }
+
+    .cta-box .cta-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-header {
+        margin-bottom: 48px;
+    }
+
+    @media (max-width: 768px) {
+        .section-subtitle {
+            font-size: 28px;
+        }
+        .section-description {
+            font-size: 16px;
+        }
+        .content-card {
+            padding: 24px;
+        }
+        .process-card {
+            padding: 20px;
+        }
+        .equal-height img {
+            height: 200px;
+        }
+        .featured-image-container img {
+            min-height: 300px;
+        }
+        .value-pill {
+            padding: 10px 16px;
+            font-size: 14px;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .animated-section,
+        .fade-in,
+        .scale-up,
+        .process-card,
+        .value-pill {
+            transition: none;
+        }
+    }
+
+    /* =========================
+       WHY CHOOSE US
+    ==========================*/
+    .feature-card {
+        border-radius: 30px;
+        background: #e0e0e0;
+        box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .feature-card:hover {
+        transform: scale(1.05);
+    }
+
+    .feature-container {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .feature-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -15px;
+    }
+
+    .feature-col {
+        padding: 0 15px;
+        margin-bottom: 30px;
+    }
+
+    @media (min-width: 1200px) {
+        .feature-col {
+            width: 20%;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+        .feature-col {
+            width: 33.333%;
+        }
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+        .feature-col {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .feature-col {
+            width: 100%;
+        }
+    }
+
+    .icon-box {
+        text-align: center;
+        padding: 20px 15px;
+    }
+
+    .icon-box i {
+        font-size: 3rem;
+        color: #dc3545;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    .icon-box h6 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .icon-box p {
+        font-size: 0.9rem;
+        margin-bottom: 0;
+    }
+
+    /* =========================
+       PORTFOLIO & DESTINATIONS
+    ==========================*/
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+        gap: 20px;
+    }
+
+    .portfolio-item {
+        position: relative;
+    }
+
+    .portfolio-content {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+    }
+
+    .portfolio-content img {
+        width: 100%;
+        display: block;
+    }
+
+    .portfolio-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease;
+        border-radius: 12px;
+    }
+
+    .portfolio-content:hover .portfolio-overlay {
+        opacity: 1;
+    }
+
+    .hover-content {
+        color: #fff;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .hover-content .title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+
+    .hover-content .subtitle {
+        font-size: 14px;
+    }
+
+    .destination-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .destination-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        perspective: 1000px;
+    }
+
+    .destination-item img {
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    .destination-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.6s ease-in-out;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .destination-item:hover .destination-overlay {
+        opacity: 1;
+    }
+
+    .hover-info {
+        color: #fff;
+        padding: 15px;
+    }
+
+    .destination-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .destination-subtitle {
+        font-size: 14px;
+    }
+
+    @media (max-width: 1024px) {
+        .destination-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .destination-item img {
+            height: 200px;
+            width: 300px;
+        }
+        .destination-title {
+            font-size: 16px;
+        }
+        .destination-subtitle {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .destination-grid {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        .destination-item img {
+            height: 180px;
+        }
+        .destination-title {
+            font-size: 14px;
+        }
+        .destination-subtitle {
+            font-size: 12px;
+        }
+    }
+
+    /* =========================
+       TESTIMONIAL CARDS (card-3d)
+    ==========================*/
+    .card-3d {
+        border-radius: 16px;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+
+    .card-3d:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    /* =========================
+       FAQ SECTION
+    ==========================*/
+    .faq-section {
+        padding: 40px 20px;
+        background: linear-gradient(135deg, #ffffff, #fff5f2);
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(255, 110, 66, 0.1);
+        max-width: 800px;
+        margin: 40px auto;
+        transition: all 0.3s ease;
+    }
+
+    .faq-title {
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        color: #ff6e42;
+        margin-bottom: 35px;
+        position: relative;
+        padding-bottom: 12px;
+    }
+
+    .faq-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, #4a0202, #f36464);
+        border-radius: 3px;
+    }
+
+    .accordion {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border: 1px solid #ffe6de;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+        transition: all 0.3s ease;
+    }
+
+    .accordion-item:hover {
+        box-shadow: 0 8px 15px rgba(255, 110, 66, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .accordion-header {
+        margin: 0;
+    }
+
+    .accordion-button {
+        width: 100%;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #fc0511;
+        background-color: #ffffff;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .accordion-button:after {
+        content: '+';
+        font-size: 22px;
+        font-weight: 300;
+        margin-left: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .accordion-button.active {
+        background: linear-gradient(90deg, #4a0202, #f36464);
+        color: white;
+    }
+
+    .accordion-button.active:after {
+        content: '−';
+        transform: rotate(180deg);
+    }
+
+    .accordion-button:focus {
+        outline: none;
+    }
+
+    .accordion-collapse {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+    }
+
+    .accordion-collapse.show {
+        max-height: 1000px;
+        transition: max-height 1s ease-in-out;
+    }
+
+    .accordion-body {
+        padding: 20px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #4a5568;
+        background-color: #fff;
+        border-top: 1px solid #ffe6de;
+    }
+
+    @media (max-width: 768px) {
+        .faq-section {
+            padding: 30px 15px;
+            margin: 20px;
+        }
+        .faq-title {
+            font-size: 26px;
+            margin-bottom: 25px;
+        }
+        .accordion-button {
+            font-size: 16px;
+            padding: 15px;
+        }
+        .accordion-body {
+            padding: 15px;
+            font-size: 15px;
+        }
+    }
+
+    /* =========================
+       POPUP (renamed classes kept separate from main form)
+    ==========================*/
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85));
+        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .popup-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .popup-container {
+        background: linear-gradient(145deg, #ffffff, #f8f9fa);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3),
+                    0 0 0 1px rgba(255, 255, 255, 0.1);
+        max-width: 480px;
+        width: 90%;
+        position: relative;
+        transform: scale(0.9);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slideUp 0.4s ease-out;
+    }
+
+    .popup-overlay.active .popup-container {
+        transform: scale(1);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #f1f3f5;
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        color: #495057;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-weight: 300;
+    }
+
+    .close-btn:hover {
+        background: #e9ecef;
+        color: #212529;
+        transform: rotate(90deg);
+    }
+
+    .popup-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .popup-header h2 {
+        font-size: 28px;
+        font-weight: 700;
+        color: #212529;
+        margin: 0 0 8px 0;
+        letter-spacing: -0.5px;
+    }
+
+    .popup-header p {
+        color: #6c757d;
+        font-size: 15px;
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .popup-form {
+        margin-top: 0;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        position: relative;
+    }
+
+    .popup-form .form-control {
+        width: 100%;
+        padding: 14px 18px;
+        border: 2px solid #e9ecef;
+        border-radius: 12px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        background: #ffffff;
+        color: #212529;
+        font-family: inherit;
+    }
+
+    .popup-form .form-control:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .popup-form .form-control::placeholder {
+        color: #adb5bd;
+    }
+
+    .popup-form .btn-submit {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        color: white;
+        border: none;
+        padding: 15px 24px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .popup-form .btn-submit::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .popup-form .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    .popup-form .btn-submit:hover::before {
+        left: 100%;
+    }
+
+    .popup-form .btn-submit:active {
+        transform: translateY(0);
+    }
+
+    .popup-success-message {
+        color: #4CAF50;
+        font-weight: 600;
+        margin: 0;
+        text-align: center;
+        padding: 20px;
+        background: rgba(76, 175, 80, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        animation: successPop 0.5s ease;
+    }
+
+    @keyframes successPop {
+        0% { transform: scale(0.8); opacity: 0; }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    .popup-green-tick {
+        font-size: 24px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: #4CAF50;
+        color: white;
+        border-radius: 50%;
+        animation: tickBounce 0.6s ease;
+    }
+
+    @keyframes tickBounce {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    .contact-us-popup {
+        margin-top: 30px;
+        padding-top: 25px;
+        border-top: 2px solid #e9ecef;
+    }
+
+    .contact-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #212529;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    .contact-email {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .contact-email a {
+        color: #4CAF50;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .contact-email a:hover {
+        color: #45a049;
+        text-decoration: underline;
+    }
+
+    .phone-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .phone-card {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 12px;
+        text-align: center;
+        border: 2px solid #e9ecef;
+        transition: all 0.3s ease;
+    }
+
+    .phone-card:hover {
+        border-color: #4CAF50;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .phone-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #6c757d;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
+
+    .phone-number {
+        font-size: 15px;
+        font-weight: 700;
+        color: #212529;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    @media (max-width: 576px) {
+        .popup-container {
+            padding: 30px 20px;
+            border-radius: 16px;
+        }
+        .popup-header h2 {
+            font-size: 24px;
+        }
+        .phone-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+    }
+
+    .popup-form .form-control:invalid:not(:placeholder-shown) {
+        border-color: #dc3545;
+    }
+
+    .popup-form .form-control:valid:not(:placeholder-shown) {
+        border-color: #4CAF50;
+    }
+</style>
+
+
+<div class="mr-1">
+    <div class="mt-2">
+        <div class="row align-items-center" style="display: flex; flex-wrap: wrap; gap: 0px; margin: 0; margin-top:80px">
+            <!-- Image Section (Takes 70% Width) -->
+            <div class="col-lg-12 col-md-12" style="display: flex; justify-content: flex-end; align-items: center; padding-right: 0px;">
+                <div class="hero-image" style="width: 100%; height: 100%;">
+                    <!-- Desktop Image -->
+                    <img class="d-none d-lg-block img-fluid" src="assets/imgs/desktop_corousel.JPG" 
+                         style="object-fit: fill; width: 100%; height: 80vh; border-radius: 8px;" alt="Desktop Carousel">
+
+                    <!-- Tablet Image -->
+                    <img class="d-none d-md-block d-lg-none img-fluid" src="assets/imgs/tab_corousel.jpg" 
+                         style="object-fit: fill; width: 100%; height: 80vh; border-radius: 8px;" alt="Tablet Carousel">
+
+                    <!-- Mobile Image -->
+                    <img class="d-block d-md-none img-fluid" src="assets/imgs/mobile_slide.JPG" 
+                         style="object-fit: fill; width: 100%; height: auto; border-radius: 8px;" alt="Mobile Carousel">
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</div>
+        
+
+    <!-- End of hero section  -->
+
+
+<!--Start of Sliders -->
+
+  
+
+
+<!-- Unique Slider Section -->
+   <div class="custom-slider-container" style="border: 1px solid #ff6e42">
+       <div class="custom-slider-wrapper " >
+           <div class="custom-slide"><img src="assets\imgs\tu1.jpg" alt="Image 1"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu2.jpg" alt="Image 2"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu3.jpg" alt="Image 3"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu4.jpg" alt="Image 4"></div>
+         
+           <div class="custom-slide"><img src="assets\imgs\tu5.jpg" alt="Image 5"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu6.jpg" alt="Image 6"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu7.jpg" alt="Image 7"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu8.jpg" alt="Image 8"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu9.jpg" alt="Image 9"></div>
+            
+           <div class="custom-slide"><img src="assets\imgs\tu11.jpg" alt="Image 11"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu12.jpg" alt="Image 12"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu13.jpg" alt="Image 13"></div>
+         
+           <div class="custom-slide"><img src="assets\imgs\tu14.jpg" alt="Image 14"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu15.jpg" alt="Image 15"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu16.jpg" alt="Image 16"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu17.jpg" alt="Image 17"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu18.jpg" alt="Image 18"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu19.jpg" alt="Image 19"></div>
+         
+           <!-- Duplicate images for smooth infinite loop -->
+           <div class="custom-slide"><img src="assets\imgs\tu1.jpg" alt="Image 1"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu2.jpg" alt="Image 2"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu3.jpg" alt="Image 3"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu4.jpg" alt="Image 4"></div>
+         
+           <div class="custom-slide"><img src="assets\imgs\tu5.jpg" alt="Image 5"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu6.jpg" alt="Image 6"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu7.jpg" alt="Image 7"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu8.jpg" alt="Image 8"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu9.jpg" alt="Image 9"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu11.jpg" alt="Image 11"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu12.jpg" alt="Image 12"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu13.jpg" alt="Image 13"></div>
+         
+           <div class="custom-slide"><img src="assets\imgs\tu14.jpg" alt="Image 14"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu15.jpg" alt="Image 15"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu16.jpg" alt="Image 16"></div>  
+           <div class="custom-slide"><img src="assets\imgs\tu17.jpg" alt="Image 17"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu18.jpg" alt="Image 18"></div>
+           <div class="custom-slide"><img src="assets\imgs\tu19.jpg" alt="Image 19"></div>
+         
+          
+         
+       </div>
+   </div>
+
+ <!-- Stats Section - ADD AFTER UNIVERSITY SLIDER -->
+<section class="stats-section" style="background: linear-gradient(135deg, #fc0511, #a30008); padding: 30px 0; color: white;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <h2 class="display-4 fw-bold mb-0">5+</h2>
+                    <p class="mb-0" style="font-size: 18px;">Years Experience</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <h2 class="display-4 fw-bold mb-0">500+</h2>
+                    <p class="mb-0" style="font-size: 18px;">Students Guided</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <h3 class="display-4 fw-bold mb-0">1000+</h2>
+                    <p class="mb-0" style="font-size: 18px;">Partner Universities</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4">
+                <div class="stat-item">
+                    <h4 class="display-4 fw-bold mb-0">100%</h2>
+                    <p class="mb-0" style="font-size: 18px;">Visa Success Rate</p>
+                </div>
+            </div>
+      
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced Professional About Section -->
+
+<section class="animated-section mt-5 pt-5 pb-5" id="about">
+    <div class="container">
+        <!-- First Row: Main Content -->
+        <div class="row justify-content-between align-items-center">
+            <!-- Left Section: Content -->
+            <div class="col-lg-6 col-md-12">
+                <div class="section-header">
+                    <h6 class="section-title fade-in">MERITMINDS</h6>
+                    <h2 class="section-subtitle fade-in">Your Trusted Partner in International Education</h2>
+                    <p class="section-description fade-in">
+                        At <b>MeritMinds</b>, we are dedicated to transforming educational aspirations into reality. 
+                        Since our establishment, we have successfully guided thousands of students toward achieving 
+                        their dreams of international higher education.
+                    </p>
+                </div>
+
+                <div class="content-card fade-in">
+                    <h5>Our Mission</h5>
+                    <p>
+                        We believe that quality education knows no boundaries. Our mission is to empower students 
+                        with the knowledge, resources, and support they need to access world-class educational 
+                        opportunities abroad, allowing them to reach their full potential on the global stage.
+                    </p>
+                </div>
+
+                <div class="content-card fade-in">
+                    <h5>Our Values</h5>
+                    <div class="d-flex flex-wrap mt-3">
+                        <span class="value-pill">Integrity</span>
+                        <span class="value-pill">Excellence</span>
+                        <span class="value-pill">Innovation</span>
+                        <span class="value-pill">Empathy</span>
+                        <span class="value-pill">Diversity</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Section: Featured Image -->
+            <div class="col-lg-5 col-md-12">
+                <div class="about-img-container featured-image-container fade-in scale-up">
+                    <img src="assets/imgs/rooma.jpg" alt="Global Education at MeritMinds" class="w-100">
+                </div>
+            </div>
+        </div>
+
+        <!-- Second Row: Process and Gallery -->
+        <div class="row mt-5 pt-4">
+            <!-- Left Side: Image Gallery (STACKED VERTICALLY) -->
+            <div class="col-lg-6 col-md-12 order-md-2 order-lg-1">
+                <div class="equal-height">
+                    <div class="fade-in">
+                        <div class="about-img-container scale-up">
+                            <img src="assets/imgs/room1.jpg" alt="Student Consulting Services">
+                        </div>
+                    </div>
+                    <div class="fade-in">
+                        <div class="about-img-container scale-up">
+                            <img src="assets/imgs/room2.jpg" alt="International Education Support">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Process -->
+            <div class="col-lg-6 col-md-12 order-md-1 order-lg-2">
+                <div class="process-cards fade-in">
+                    <h3 style="font-size: 32px; font-weight: 700; color: #1a1a1a; margin-bottom: 30px;">Our Process</h3>
+
+                    <div class="process-card">
+                        <span class="process-number">1</span>
+                        <b>Initial Consultation</b>
+                        <p>We begin with a thorough assessment of your academic profile, interests, and career objectives.</p>
+                    </div>
+
+                    <div class="process-card">
+                        <span class="process-number">2</span>
+                        <b>University Selection</b>
+                        <p>Based on your profile, we help you identify institutions that match your academic and personal requirements.</p>
+                    </div>
+
+                    <div class="process-card">
+                        <span class="process-number">3</span>
+                        <b>Application Strategy</b>
+                        <p>We develop a strategic plan for applications, emphasizing your strengths while addressing potential concerns.</p>
+                    </div>
+
+                    <div class="process-card">
+                        <span class="process-number">4</span>
+                        <b>Document Preparation</b>
+                        <p>Our experts assist with crafting compelling personal statements, resumes, and recommendation letters.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="row">
+            <div class="col-12">
+                <div class="cta-box fade-in">
+                    <p>Join MeritMinds and take the first step toward a world of opportunities!</p>
+                    <a href="contact.php" class="cta-button">Start Your Journey</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Intersection Observer with stagger effect
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 100);
+                    }
+                });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.animated-section, .fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</section>
+
+<!-- End OF About Section -->
+    
+   
+  
+
+<!-- Why Choose Us Section  -->
+  
+
+    <section class="section bg-light" style=" padding: 40px 0;">
+            <div class="feature-container">
+         <h6 class="section-title text-start mb-0 masked-text mb-5">Why Choose Us</h6>
+        <h6 class="section-subtitle text-start mb-5 mt-0">Because We Offer...</h6>
+
+                <div class="feature-row">
+                    <!-- Card 1 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-bookmark-alt"></i>
+                                <h6>Personalized Support</h6>
+                                <p>Our team provides one-on-one consultation to tailor your application and scholarship process.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-medall"></i>
+                                <h6>Exclusive Scholarships</h6>
+                                <p>We offer access to exclusive scholarships that aren't widely known, giving you an edge.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3 -->
+                    <!-- <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-world"></i>
+                                <h6>Global Opportunities</h6>
+                                <p>We provide guidance for universities in the USA, UK, Canada, Australia, and more.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Card 4 -->
+                    <!-- <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-user"></i>
+                                <h6>Personalized Guidance</h6>
+                                <p>We work with you one-on-one to guide you toward the best academic and career path.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Card 5 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-bar-chart-alt"></i>
+                                <h6>Industry Insights</h6>
+                                <p>Gain access to the latest industry trends and employment opportunities for your career.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6 -->
+                    <!-- <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-briefcase"></i>
+                                <h6>Career Development</h6>
+                                <p>We help you develop skills needed to succeed in the global workforce.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Card 7 -->
+                    <!-- <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-ruler-pencil"></i>
+                                <h6>Customized Study Plans</h6>
+                                <p>We design study plans specific to each student's strengths and areas for improvement.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Card 8 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-notepad"></i>
+                                <h6>Mock Tests & Practice</h6>
+                                <p>Gain access to mock tests that simulate real exam environments.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 9 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-stats-up"></i>
+                                <h6>Performance Tracking</h6>
+                                <p>Regular assessments help ensure that you stay on the right track to success.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 10 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-wallet"></i>
+                                <h6>Flexible Loan Options</h6>
+                                <p>We offer a variety of loan options with flexible repayment plans.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 11 -->
+                    <!-- <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-files"></i>
+                                <h6>Simplified Application</h6>
+                                <p>Our team helps you through the loan application process with all required documentation.</p>
+                            </div>
+                        </div>
+                    </div> -->
+                    
+                    <!-- Card 12 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-pie-chart"></i>
+                                <h6>Competitive Rates</h6>
+                                <p>We work with trusted institutions to offer loans at competitive interest rates.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 13 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-world"></i>
+                                <h6>Travel Assistance</h6>
+                                <p>We handle all aspects of your travel arrangements for a stress-free experience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 14 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-money"></i>
+                                <h6>Best Forex Rates</h6>
+                                <p>Get access to competitive exchange rates and advice on managing finances abroad.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 15 -->
+                    <div class="feature-col">
+                        <div class="feature-card">
+                            <div class="icon-box">
+                                <i class="ti-check-box"></i>
+                                <h6>Expert Visa Guidance</h6>
+                                <p>Our experienced counsellors guide you through every step of the visa process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+   
+<!-- Why Choose Us Section End -->
+  
+
+
+
+
+
+   
+
+
+    
+        <!-- Portfolio Section -->
+            <section id="study-portfolio" class="section portfolio-section text-start">
+        <div class="container text-start">
+             <h6 class="section-title text-start mb-0 masked-text mb-5">Our Portfolio</h6>
+            <h6 class="section-subtitle text-start mb-5 mt-1">Explore opportunities across top destinations</h6>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <!-- USA -->
+                <div class="portfolio-item country-usa" data-aos="zoom-in">
+                    <div class="portfolio-content">
+                        <img src="assets\imgs\USA.jpg" alt="Study in USA" style="object-fit:contain;">
+                        <div class="portfolio-overlay">
+                            <a href="usa-details.php">
+                                <div class="hover-content">
+                                    <h6 class="title">Study in USA</h6>
+                                    <p class="subtitle">Explore education and career opportunities in the USA</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- UK -->
+                <div class="portfolio-item country-uk" data-aos="flip-left" data-aos-delay="200">
+                    <div class="portfolio-content">
+                        <img src="assets\imgs\UK.jpg" alt="Study in UK" style="object-fit:contain;">
+                        <div class="portfolio-overlay">
+                            <a href="uk-details.php">
+                                <div class="hover-content">
+                                    <h6 class="title">Study in UK</h6>
+                                    <p class="subtitle">Discover top universities and courses in the UK</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Australia -->
+                <div class="portfolio-item country-australia" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="portfolio-content">
+                        <img src="assets\imgs\AUSTRALIA.jpg" alt="Study in Australia" style="object-fit:contain;">
+                        <div class="portfolio-overlay">
+                            <a href="australia-details.php">
+                                <div class="hover-content">
+                                    <h6 class="title">Study in Australia</h6>
+                                    <p class="subtitle">Find out about studying and living in Australia</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Canada -->
+                <div class="portfolio-item country-canada" data-aos="flip-right" data-aos-delay="600">
+                    <div class="portfolio-content">
+                        <img src="assets\imgs\CANADA.jpg" alt="Study in Canada" style="object-fit:contain;">
+                        <div class="portfolio-overlay">
+                            <a href="canada-details.php">
+                                <div class="hover-content">
+                                    <h6 class="title">Study in Canada</h6>
+                                    <p class="subtitle">Discover top universities and career prospects in Canada</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Ireland -->
+                <div class="portfolio-item country-ireland" data-aos="zoom-in" data-aos-delay="800">
+                    <div class="portfolio-content">
+                        <img src="assets\imgs\IRELAND.jpg" alt="Study in Ireland"  style="object-fit:contain;">
+                        <div class="portfolio-overlay">
+                            <a href="ireland-details.php">
+                                <div class="hover-content">
+                                    <h6 class="title">Study in Ireland</h6>
+                                    <p class="subtitle">Explore top educational programs in Ireland</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Germany -->
+                <div class="portfolio-item country-germany" data-aos="flip-left" data-aos-delay="1000">
+                    <div class="portfolio-content">
+                        <img src="assets\imgs\GERMANY.jpg" alt="Study in Germany" style="object-fit:contain;">
+                        <div class="portfolio-overlay">
+                            <a href="germany-details.php">
+                                <div class="hover-content">
+                                    <h6 class="title">Study in Germany</h6>
+                                    <p class="subtitle">Find out about top universities and engineering programs in Germany</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </section>
+    
+
+    <!-- Destination Gallery for Small Screens -->
+
+  
+
+
+
+<!-- Destination Gallery -->
+<section id="destination-gallery" class="section destination-section text-center">
+    <div class="gallery-container">
+        <h6 class="section-header text-center masked-text" data-aos="fade-up">Our Destinations</h6>
+        <h6 class="section-subtext mb-5 text-center" data-aos="fade-up" data-aos-delay="200">
+            Explore opportunities across top study destinations
+        </h6>
+
+        <!-- Destination Grid -->
+        <div class="destination-grid">
+            <!-- USA -->
+            <div class="destination-item country-usa" data-aos="flip-left">
+                <div class="destination-content">
+                <img src="assets\imgs\USA.jpg" alt="Study in USA" style="object-fit:contain;">
+                <div class="destination-overlay">
+                        <a href="usa-details.php">
+                            <div class="hover-info">
+                                <h6 class="destination-title">Study in USA</h6>
+                                <p class="destination-subtitle">Explore education and career opportunities in the USA</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UK -->
+            <div class="destination-item country-uk" data-aos="flip-right" data-aos-delay="200">
+                <div class="destination-content">
+                    <img src="assets\imgs\UK.jpg" alt="Study in UK" style="object-fit:contain;">
+                    <div class="destination-overlay">
+                        <a href="uk-details.php">
+                            <div class="hover-info">
+                                <h6 class="destination-title">Study in UK</h6>
+                                <p class="destination-subtitle">Discover top universities and courses in the UK</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Australia -->
+            <div class="destination-item country-australia" data-aos="zoom-in" data-aos-delay="400">
+                <div class="destination-content">
+                    <img src="assets\imgs\AUSTRALIA.jpg" alt="Study in Australia" style="object-fit:contain;">
+                    <div class="destination-overlay">
+                        <a href="australia-details.php">
+                            <div class="hover-info">
+                                <h6 class="destination-title">Study in Australia</h6>
+                                <p class="destination-subtitle">Find out about studying and living in Australia</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canada -->
+            <div class="destination-item country-canada" data-aos="fade-up" data-aos-delay="600">
+                <div class="destination-content">
+                    <img src="assets\imgs\CANADA.jpg" alt="Study in Canada" style="object-fit:contain;">
+                    <div class="destination-overlay">
+                        <a href="canada-details.php">
+                            <div class="hover-info">
+                                <h6 class="destination-title">Study in Canada</h6>
+                                <p class="destination-subtitle">Discover top universities and career prospects in Canada</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ireland -->
+            <div class="destination-item country-ireland" data-aos="zoom-in" data-aos-delay="800">
+                <div class="destination-content">
+                    <img src="assets\imgs\IRELAND.jpg" alt="Study in Ireland" style="object-fit:contain;">
+                    <div class="destination-overlay">
+                        <a href="ireland-details.php">
+                            <div class="hover-info">
+                                <h6 class="destination-title">Study in Ireland</h6>
+                                <p class="destination-subtitle">Explore top educational programs in Ireland</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Germany -->
+            <div class="destination-item country-germany" data-aos="flip-left" data-aos-delay="1000">
+                <div class="destination-content">
+                    <img src="assets\imgs\GERMANY.jpg" alt="Study in Germany" style="object-fit:contain;">
+                    <div class="destination-overlay">
+                        <a href="germany-details.php">
+                            <div class="hover-info">
+                                <h6 class="destination-title">Study in Germany</h6>
+                                <p class="destination-subtitle">Find out about top universities and engineering programs in Germany</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</section>
+
+<!-- Initialize AOS -->
+<script>
+    AOS.init({
+        duration: 1000, // Animation duration in milliseconds
+        once: false, // Animation should happen only once
+        offset: 100 // Start animation when 100px from viewport
+    });
+</script>
+
+
+    
+    
+    
+    
+
+    <!-- Recent Students Section -->
+    <!-- <section class="section" id="recent-students">
+        <div class="container text-center">
+            <h6 class="section-header text-center masked-text" style="font-size:36px;" data-aos="fade-up">Recent Students</h6>
+
+            <h6 class="section-subheading mb-5">Success Stories of Our Students Who Recently Went Abroad</h6>
+    
+            <div class="row justify-content-center h-100" data-aos="fade-up">
+                <!-- Student 1 --
+                <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="300">
+                    <div class="card-3d">
+                        <div class="image-container">
+                            <img src="https://assets.telegraphindia.com/telegraph/2022/Sep/1663409846_pasted-image-0.jpg" class="student-img" alt="Amit Sharma">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title font-weight-bold">Amit Sharma</h6>
+                            <p class="card-text">Secured a full scholarship to pursue his Master's in the UK.</p>
+                            <a href="#" class="small text-muted">Read Amit's Journey</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student 2 --
+                <div class="col-md-4 mb-4" data-aos="flip-up"  data-aos-delay="500">
+                    <div class="card-3d">
+                        <div class="image-container">
+                            <img src="https://cdnbloglearn.leverageedu.com/learn/wp-content/uploads/2023/06/13133745/English-_8_-_1_-380x220.webp" class="student-img" alt="Aman Singh">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title font-weight-bold">Aman Singh</h6>
+                            <p class="card-text">Successfully enrolled in a top Canadian university with partial funding.</p>
+                            <a href="#" class="small text-muted">Read Aman's Experience</a>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- Student 3 --
+                <div class="col-md-4 mb-4" data-aos="flip-right" data-aos-delay="700">
+                    <div class="card-3d">
+                        <div class="image-container">
+                            <img src="https://img.etimg.com/thumb/width-1200,height-900,imgsize-436199,resizemode-75,msid-82731235/nri/study/future-trends-for-indian-students-looking-to-study-abroad.jpg" class="student-img" alt="G Preethi">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title font-weight-bold">G Preethi</h6>
+                            <p class="card-text">Admitted to her dream university in Australia with a scholarship.</p>
+                            <a href="#" class="small text-muted">Read Preethi's Story</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    
+ 
+    
+    <!-- End of Blog Section -->
+
+    <!-- Testmonial Section -->
+    <section class="section bg-light" id="testimonial">
+        <div class="container">
+            <h6 class="section-title text-center mb-0 masked-text mb-5">Our Students Speak For Us</h6>
+            <!-- <h6 class="section-subtitle mb-5 text-center">What Our Clients Say</h6> -->
+        
+            <!-- Testimonial Cards Row -->
+            <div class="row">
+                
+                <!-- Card 1 Tanishq -->
+                <div class="col-md-4 my-3" data-aos="flip-right" data-aos-delay="600">
+                    <div class="card-3d">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-2">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0 fw-bold" style="color:#5f5a07;" >INCREDIBLY GRATEFUL</h6>
+                                    <h6 class="mt-1 mb-0 text-end">★★★★★</h6>
+                                    <small class="text-warning d-block text-end">Tanishq Kondru</small>
+                                    <small style="color:#5f5a07;" class="d-block text-end">University of Minnesota</small>
+                                </div>
+                            </div>
+                            <p class="mb-0">"Incredibly grateful to MERIT MINDS OVERSEAS for personalized advice and meticulous visa interview preparation. Highly recommend for studying abroad."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 2 Salma -->
+                <div class="col-md-4 my-3" data-aos="flip-up" data-aos-delay="300">
+                    <div class="card-3d">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-2">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0 fw-bold" style="color:#004694;">EXCEPTIONAL SUPPORT</h6>
+                                    <h6 class="mt-1 mb-0 text-end">★★★★★</h6>
+                                    <small class="text-warning d-block text-end">Salma Sultana</small>
+                                    <small style="color:#004694;" class="d-block text-end">Webster University</small>
+                                </div>
+                            </div>
+                            <p class="mb-0">"MERIT MINDS OVERSEAS played a key role in my USA university admission and student visa application process, guiding me through every challenge, despite my educational gap."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Card 3  Testimonial: Gopalakrishna Mnukonda -->
+                <div class="col-md-4 my-3" data-aos="flip-up" data-aos-delay="800">
+                    <div class="card-3d">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-2">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0 fw-bold" style="color:#239bca;">FANTASTIC EXPERIENCE</h6>
+                                    <h6 class="mt-1 mb-0 text-end">★★★★★</h6>
+                                    <small class="text-warning d-block text-end">Gopalakrishna Reddy Manukonda</small>
+                                    <small style="color:#239bca;" class="d-block text-end">University of Florida</small>
+                                </div>
+                            </div>
+                            <p class="mb-0">"Exceptional support throughout my study journey, from exam preparation to visa process approval Expert guidance made everything seamless."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Card 4 Lakshma -->
+                <div class="col-md-4 my-3" data-aos="flip-right" data-aos-delay="100">
+                    <div class="card-3d">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-2">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0 fw-bold" style="color:#dc3545;">RESOURCEFUL, RESPONSIVE</h6>
+                                    <h6 class="mt-1 mb-0 text-end">★★★★★</h6>
+                                    <small class="text-warning d-block text-end">Lakshma Reddy Pothireddy</small>
+                                    <small style="color:#dc3545;" class="d-block text-end">Cleveland State University</small>
+                                </div>
+                            </div>
+                            <p class="mb-0">"This was our first experience with MERIT MINDS OVERSEAS, particularly with Shekar sir, and it was truly impressive and pleasant. He was resourceful and highly customer-focused."</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial: Tanishq Kondru (duplicate) -->
+                <div class="col-md-4 my-3" data-aos="flip-right" data-aos-delay="600">
+                    <div class="card-3d">
+                        <div class="card-body">
+                            <div class="media align-items-center mb-2">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0 fw-bold" style="color:#7d6ef3">EXCELLENT EXPERIENCE</h6>
+                                    <h6 class="mt-1 mb-0 text-end">★★★★★</h6>
+                                    <small class="text-warning d-block text-end">Ishitha Bussa</small>
+                                    <small style="color:#7d6ef3" class="d-block text-end">UMass Boston University</small>
+                                </div>
+                            </div>
+                            <p class="mb-0">"I had an excellent experience, offered helpful advice and made my application process smooth and stress-free. Rahul Sir on my side, everything including my VISA process went smoothly"</p>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Testimonial: VENKATA SAIKUMAR MARRI -->
+                <div class="col-md-4 my-3" data-aos="flip-left" data-aos-delay="1000">
+                    <div class="card-3d">
+                        <div class="card-body" >
+                            <div class="media align-items-center mb-2">
+                                <div class="media-body">
+                                    <h6 class="mt-1 mb-0 fw-bold" style="color: #e67e00;">CONSISTENT & INSIGHTFUL</h6>
+                                    <h6 class="mt-1 mb-0 text-end">★★★★★</h6>
+                                    <small class="text-warning d-block text-end">Venkata Saikumar Marri</small>
+                                    <small style="color: #e67e00;" class="d-block text-end">Wright State University</small>
+                                </div>
+                            </div>
+                            <p class="mb-0">"I am delighted to share that I have received my visa approval to attend Wright State University for Fall 2024 semester. All credit for this achievement goes to the team at MERIT MINDS OVERSEAS."</p>
+                        </div>
+                    </div>
+                </div>
+
+              
+            </div>
+        </div>
+    </section>
+    <!-- End of Testmonial Section -->
+   
+
+    <!-- FAQ Section -->
+  
+    <div class="faq-section">
+        <h6 class="section-title text-center mb-0 masked-text mb-5">Frequently Asked Questions</h6>
+            <!-- <h3 class="section-title text-center mb-0 masked-text mb-5">Our Students Speak For Us</h3> -->
+    
+        <div class="accordion" id="faqAccordion">
+
+            <!-- FAQ Item 1: Visa Consulting -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingOne">
+                    <button class="accordion-button active" type="button">
+                        What visa consulting services do you offer?
+                    </button>
+                </h3>
+                <div id="collapseOne" class="accordion-collapse show">
+                    <div class="accordion-body">
+                        We provide end-to-end visa consulting services, including assistance with student visas, work visas, and tourist visas. Our experts guide you through the application process, document preparation, and interview preparation to ensure a smooth experience.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2: IELTS Preparation -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button" type="button">
+                        Do you offer IELTS preparation assistance?
+                    </button>
+                </h3>
+                <div id="collapseTwo" class="accordion-collapse">
+                    <div class="accordion-body">
+                        Yes, we offer comprehensive IELTS preparation services, including study materials, mock tests, and personalized coaching to help you achieve your desired band score.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3: GRE Exam Guidance -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingThree">
+                    <button class="accordion-button" type="button">
+                        Can you help with GRE exam preparation?
+                    </button>
+                </h3>
+                <div id="collapseThree" class="accordion-collapse">
+                    <div class="accordion-body">
+                        Absolutely! We provide GRE exam guidance, including study plans, practice tests, and tips to improve your quantitative, verbal, and analytical writing skills.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4: Top Universities -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingFour">
+                    <button class="accordion-button" type="button">
+                        How do you help with university selection?
+                    </button>
+                </h3>
+                <div id="collapseFour" class="accordion-collapse">
+                    <div class="accordion-body">
+                        We assist you in selecting the best universities based on your academic profile, career goals, and preferences. Our team provides insights into top universities, their programs, and admission requirements.
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Item 5: Scholarship Assistance -->
+            <div class="accordion-item">
+                <h3 class="accordion-header" id="headingFive">
+                    <button class="accordion-button" type="button">
+                        Do you provide scholarship assistance?
+                    </button>
+                </h3>
+                <div id="collapseFive" class="accordion-collapse">
+                    <div class="accordion-body">
+                        Yes, we help you identify and apply for scholarships that match your profile. Our team guides you through the application process and ensures you submit a strong application.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript for Accordion Functionality -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Toggle active class on the button
+                    this.classList.toggle('active');
+                    
+                    // Get the target collapse element
+                    const collapse = this.parentElement.nextElementSibling;
+                    
+                    // Toggle show class on the collapse
+                    collapse.classList.toggle('show');
+                    
+                    // Optional: Close other open accordions (comment out for multiple open accordions)
+                    if (collapse.classList.contains('show')) {
+                        accordionButtons.forEach(otherButton => {
+                            if (otherButton !== button) {
+                                otherButton.classList.remove('active');
+                                otherButton.parentElement.nextElementSibling.classList.remove('show');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+   
+  
+<!-- Enhanced Professional Pop-up Modal -->
+
+<!-- Enhanced Popup Overlay -->
+<div class="popup-overlay" id="popupOverlay">
+    <div class="popup-container">
+        <button class="close-btn" id="closePopup" aria-label="Close">&times;</button>
+        
+        <div class="popup-header">
+            <h2>Get In Touch</h2>
+            <p>We'd love to hear from you. Fill out the form below.</p>
+        </div>
+        
+        <form action="https://formsubmit.co/ajax/meritminds.info@gmail.com" method="POST" id="popupFormElement" class="popup-form">
+            <!-- Honeypot spam protection -->
+            <input type="text" name="_honey" style="display:none">
+            
+            <!-- FormSubmit Configuration -->
+            <input type="hidden" name="_subject" value="New Contact Form Submission - MeritMinds">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            
+            <div class="form-group">
+                <input type="text" 
+                       class="form-control" 
+                       name="name" 
+                       placeholder="Your Full Name" 
+                       required 
+                       aria-label="Name">
+            </div>
+            <div class="form-group">
+                <input type="tel" 
+                       class="form-control" 
+                       name="whatsappNumber"
+                       placeholder="WhatsApp Number (e.g., +91 9876543210)" 
+                       required 
+                       pattern="^\+?[0-9]{10,15}$"
+                       aria-label="WhatsApp Number">
+            </div>
+            <div class="form-group">
+                <input type="email" 
+                       class="form-control" 
+                       name="email"
+                       placeholder="Your Email Address" 
+                       required 
+                       aria-label="Email">
+            </div>
+            <div class="form-group" id="submitContainer">
+                <button type="submit" class="btn-submit">Send Message</button>
+            </div>
+            <div class="form-group" id="successContainer" style="display:none;">
+                <p class="success-message">
+                    <span class="green-tick">✓</span>
+                    Thank you! We'll get back to you soon.
+                </p>
+            </div>
+        </form>
+        
+        <div class="contact-us">
+            <p class="contact-title">Need Immediate Assistance?</p>
+            <div class="contact-email">
+                <a href="mailto:info@meritminds.co.in">
+                    📧 info@meritminds.co.in
+                </a>
+            </div>
+            
+            <div class="phone-grid">
+                <div class="phone-card">
+                    <div class="phone-label">Andhra Pradesh</div>
+                    <p class="phone-number">📞 +91 9505889191</p>
+                </div>
+                <div class="phone-card">
+                    <div class="phone-label">Telangana</div>
+                    <p class="phone-number">📞 +91 9505929191</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const popupOverlay = document.getElementById('popupOverlay');
+        const closePopupBtn = document.getElementById('closePopup');
+        const popupForm = document.getElementById('popupFormElement');
+        const submitContainer = document.getElementById('submitContainer');
+        const successContainer = document.getElementById('successContainer');
+        
+        // Check if the popup has been shown before
+        const hasPopupBeenShown = localStorage.getItem('popupShown');
+        
+        // If popup hasn't been shown before, display it
+        if (!hasPopupBeenShown) {
+            setTimeout(function() {
+                popupOverlay.classList.add('active');
+            }, 2000); // Show popup after 2 seconds
+            
+            localStorage.setItem('popupShown', 'true');
+        }
+        
+        // Close popup when clicking the close button
+        closePopupBtn.addEventListener('click', function() {
+            popupOverlay.classList.remove('active');
+        });
+        
+        // Close popup when clicking outside
+        popupOverlay.addEventListener('click', function(event) {
+            if (event.target === popupOverlay) {
+                popupOverlay.classList.remove('active');
+            }
+        });
+        
+        // Handle form submission with AJAX
+        popupForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Disable submit button to prevent multiple submissions
+            const submitBtn = popupForm.querySelector('.btn-submit');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Send form data using fetch API
+            fetch(popupForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    submitContainer.style.display = 'none';
+                    successContainer.style.display = 'block';
+                    
+                    // Reset form
+                    popupForm.reset();
+                    
+                    // Close popup after 3 seconds
+                    setTimeout(function() {
+                        popupOverlay.classList.remove('active');
+                        submitContainer.style.display = 'block';
+                        successContainer.style.display = 'none';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Send Message';
+                    }, 3000);
+                } else {
+                    alert('Something went wrong. Please try again.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Send Message';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send message. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
+        });
+    });
+    
+    // Function to manually open popup
+    function openContactPopup() {
+        document.getElementById('popupOverlay').classList.add('active');
+    }
+</script>
+
+
+	
+	<!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap 3 affix -->
+	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- Isotope -->
+    <script src="assets/vendors/isotope/isotope.pkgd.js"></script>
+
+    <!-- LeadMark js -->
+    <script src="assets/js/leadmark.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <?php include 'footer.php'; ?>
+</body>
+    </html>

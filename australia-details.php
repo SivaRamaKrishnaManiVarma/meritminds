@@ -1,0 +1,1 @@
+<?php $_GET['country'] = 'australia'; include 'country-template.php'; ?>

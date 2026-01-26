@@ -1,0 +1,586 @@
+/* Base Styling */
+.aus-page-container {
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Theme Color Variables */
+:root {
+  --aus-primary: #fc0511;
+  --aus-primary-light: #fd4a52;
+  --aus-primary-dark: #d00410;
+  --aus-secondary: #ffebec;
+  --aus-dark: #222;
+  --aus-light: #f9f9f9;
+  --aus-gray: #f1f1f1;
+}
+
+/* Header Styling */
+.aus-header {
+  position: relative;
+  height: 85vh;
+  min-height: 500px;
+  background: linear-gradient(
+    to right,
+    var(--aus-primary-dark),
+    var(--aus-primary)
+  );
+  color: white;
+  overflow: hidden;
+}
+
+.aus-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://images.unsplash.com/photo-1523482580543-1ad775679be0");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.aus-overlay {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.aus-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  animation: aus-title-reveal 1.5s ease-out forwards;
+}
+
+.aus-subtitle {
+  font-size: 1.8rem;
+  font-weight: 300;
+  opacity: 0;
+  animation: aus-fade-in 1s ease-out 0.8s forwards;
+}
+
+.aus-shape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.aus-shape svg {
+  fill: white;
+  width: 100%;
+  height: auto;
+}
+
+/* Main Content Sections */
+.aus-section {
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.aus-section.aus-no-padding-top {
+  padding-top: 0;
+}
+
+.aus-section.aus-bg-light {
+  background-color: var(--aus-gray);
+}
+
+.aus-section.aus-bg-primary {
+  background-color: var(--aus-primary);
+  color: white;
+}
+
+.aus-section-heading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.aus-section-heading::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background-color: var(--aus-primary);
+  transition: width 0.3s ease;
+}
+
+.aus-text-center .aus-section-heading::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.aus-section.aus-bg-primary .aus-section-heading::after {
+  background-color: white;
+}
+
+.aus-section-subheading {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
+  color: #666;
+}
+
+.aus-section.aus-bg-primary .aus-section-subheading {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Content Blocks */
+.aus-content-block {
+  margin-bottom: 2rem;
+}
+
+.aus-content-image {
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.aus-content-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.aus-content-text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.aus-list {
+  padding-left: 20px;
+  margin-top: 1.5rem;
+}
+
+.aus-list-item {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.aus-list-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 12px;
+  height: 12px;
+  background-color: var(--aus-primary);
+  border-radius: 50%;
+}
+
+/* Benefits Boxes */
+.aus-benefit-box {
+  background-color: white;
+  border-radius: 15px;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.aus-benefit-box::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0;
+  background-color: var(--aus-primary);
+  opacity: 0.05;
+  z-index: -1;
+  transition: height 0.3s ease;
+}
+
+.aus-benefit-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(252, 5, 17, 0.1);
+}
+
+.aus-benefit-box:hover::before {
+  height: 100%;
+}
+
+.aus-benefit-icon {
+  font-size: 2.5rem;
+  color: var(--aus-primary);
+  margin-bottom: 1.5rem;
+}
+
+.aus-benefit-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--aus-dark);
+}
+
+.aus-benefit-text {
+  color: #666;
+}
+
+/* Call to Action Section */
+.aus-cta-section {
+  background: linear-gradient(
+    45deg,
+    var(--aus-primary-dark),
+    var(--aus-primary)
+  );
+  color: white;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.aus-cta-heading {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.aus-cta-text {
+  font-size: 1.2rem;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.aus-cta-btn {
+  display: inline-block;
+  background-color: white;
+  color: var(--aus-primary);
+  font-weight: 600;
+  padding: 0.8rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.aus-cta-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  background-color: var(--aus-light);
+}
+
+/* Testimonials Section */
+.aus-testimonial-card {
+  border-radius: 15px;
+  overflow: hidden;
+  height: 100%;
+  transition: all 0.3s ease;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.aus-testimonial-card:hover {
+  transform: rotateY(5deg) translateZ(10px);
+  box-shadow: -5px 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+.aus-testimonial-content {
+  padding: 2rem;
+  border-radius: 15px;
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.aus-testimonial-header {
+  margin-bottom: 1rem;
+}
+
+.aus-testimonial-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.aus-testimonial-university {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.aus-testimonial-stars {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.aus-testimonial-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+/* Animations */
+.aus-fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.aus-fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aus-animated-section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.aus-animated-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Utilities */
+.aus-text-center {
+  text-align: center;
+}
+
+.aus-mt-5 {
+  margin-top: 3rem;
+}
+
+.aus-mb-4 {
+  margin-bottom: 2rem;
+}
+
+.aus-mt-1 {
+  margin-top: 0.5rem;
+}
+
+.aus-mb-0 {
+  margin-bottom: 0;
+}
+
+.aus-my-3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.aus-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.aus-col-md-4,
+.aus-col-md-6 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Masked Text Effect */
+.aus-masked-text {
+  background: linear-gradient(
+    45deg,
+    var(--aus-primary),
+    var(--aus-primary-dark)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Footer */
+.aus-footer {
+  padding: 2rem 0;
+  background-color: var(--aus-dark);
+  color: white;
+}
+
+.aus-footer-text {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .aus-col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .aus-col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 992px) {
+  .aus-title {
+    font-size: 3rem;
+  }
+
+  .aus-subtitle {
+    font-size: 1.5rem;
+  }
+
+  .aus-section-heading {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .aus-header {
+    height: 70vh;
+  }
+
+  .aus-title {
+    font-size: 2.5rem;
+  }
+
+  .aus-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .aus-section {
+    padding: 3rem 0;
+  }
+
+  .aus-section-heading {
+    font-size: 1.8rem;
+  }
+
+  .aus-section-subheading {
+    font-size: 1rem;
+  }
+
+  .aus-cta-heading {
+    font-size: 2rem;
+  }
+
+  .aus-benefit-box {
+    margin-bottom: 2rem;
+  }
+
+  .aus-testimonial-card {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .aus-title {
+    font-size: 2rem;
+  }
+
+  .aus-subtitle {
+    font-size: 1rem;
+  }
+
+  .aus-overlay {
+    padding: 1rem;
+  }
+}
+
+/* Keyframe Animations */
+@keyframes aus-title-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aus-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Card 3D Effect */
+.aus-card-3d {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.aus-card-3d:hover {
+  transform: rotateY(10deg) rotateX(5deg);
+}
+
+/* Australia-specific decorative elements */
+.aus-map-overlay {
+  position: absolute;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aus-map-overlay.aus-top-right {
+  top: -50px;
+  right: -50px;
+  width: 300px;
+  height: 300px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Map_of_Australia.svg/800px-Map_of_Australia.svg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(15deg);
+}
+
+.aus-map-overlay.aus-bottom-left {
+  bottom: -50px;
+  left: -50px;
+  width: 300px;
+  height: 300px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Map_of_Australia.svg/800px-Map_of_Australia.svg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: rotate(-15deg);
+}
+
+/* Additional hover effects */
+.aus-hover-zoom {
+  transition: transform 0.3s ease;
+}
+
+.aus-hover-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* Fix for AOS animations */
+[data-aos] {
+  pointer-events: none;
+}
+
+[data-aos].aos-animate {
+  pointer-events: auto;
+}
