@@ -279,90 +279,82 @@
 </div>
 
 <!-- Get in Touch Section -->
-<section class="section pt-0 mt-5">
-    <div class="glass-contact-container" data-aos="fade-up">
-        <header class="glass-contact-header">
-            <h1>Get in Touch</h1>
-            <p>Fill out the form below and one of our consultants will get back to you shortly.</p>
-        </header>
+<!-- AJAX FormSubmit Form -->
+<form
+  action="https://formsubmit.co/ajax/meritminds.info@gmail.com"
+  method="POST"
+  class="php-email-form"
+  id="contact-form"
+>
+  <!-- Honeypot spam protection -->
+  <input type="text" name="_honey" style="display:none">
+  
+  <!-- FormSubmit Configuration - NO _next for AJAX -->
+  <input type="hidden" name="_subject" value="New Contact Form Submission - MAT 2026">
+  <input type="hidden" name="_template" value="box">
+  <input type="hidden" name="_captcha" value="false">
 
-        <form action="https://formsubmit.co/ajax/meritminds.info@gmail.com" method="POST" id="glass-contact-form">
-        <!-- Honeypot spam protection -->
-        <input type="text" name="_honey" style="display:none">
-        
-        <!-- FormSubmit Configuration -->
-        <input type="hidden" name="_subject" value="New Contact Form Submission - MeritMinds">
-        <input type="hidden" name="_template" value="box">
-        <input type="hidden" name="_captcha" value="false">
-
-        <div class="glass-contact-row">
-            <!-- Name -->
-            <div class="glass-contact-group">
-                <label for="name">Name <span style="color: #dc3545;">*</span></label>
-                <input type="text" id="name" name="Full Name" placeholder="Your Name" required>
-            </div>
-            <!-- Phone Number -->
-            <div class="glass-contact-group">
-                <label for="phone">Phone Number <span style="color: #dc3545;">*</span></label>
-                <input type="tel" id="phone" name="Contact Number" placeholder="Your Phone Number" required pattern="[0-9+\-\s()]+">
-            </div>
-        </div>
-
-        <div class="glass-contact-row">
-            <!-- Email -->
-            <div class="glass-contact-group">
-                <label for="email">Email <span style="color: #dc3545;">*</span></label>
-                <input type="email" id="email" name="Email Address" placeholder="Your Email" required>
-            </div>
-            <!-- Education -->
-            <div class="glass-contact-group">
-                <label for="education">Education <span style="color: #dc3545;">*</span></label>
-                <input type="text" id="education" name="Current Education Level" placeholder="Your Current Education" required>
-            </div>
-        </div>
-
-        <div class="glass-contact-row">
-            <!-- Country Opting For -->
-            <div class="glass-contact-group">
-                <label for="country">Country You Want to Study In <span style="color: #dc3545;">*</span></label>
-                <select id="country" name="Preferred Study Destination" required>
-                    <option selected disabled value="">Choose...</option>
-                    <option value="USA">USA</option>
-                    <option value="UK">UK</option>
-                    <option value="Canada">Canada</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Germany">Germany</option>
-                    <option value="Ireland">Ireland</option>
-                    <option value="Other">Other</option>                     
-                </select>
-            </div>
-            <!-- Gender -->
-            <div class="glass-contact-group">
-                <label for="gender">Gender <span style="color: #dc3545;">*</span></label>
-                <div class="glass-radio-container">
-                    <input type="radio" name="Gender" id="male" value="Male" required>
-                    <label for="male">Male</label>
-
-                    <input type="radio" name="Gender" id="female" value="Female" required>
-                    <label for="female">Female</label>
-
-                    <input type="radio" name="Gender" id="other" value="Other">
-                    <label for="other">Other</label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Submit Button -->
-        <div class="glass-contact-group text-center">
-            <button type="submit" class="glass-contact-button" id="submitBtn">
-                <i class="fas fa-paper-plane me-2"></i> Submit Application
-            </button>
-            <div class="form-message" id="formMessage"></div>
-        </div>
-    </form>
-
+  <div class="row">
+    <div class="col-md-6 form-group">
+      <input
+        type="text"
+        name="Full Name"
+        class="form-control"
+        placeholder="Your Name"
+        required
+      />
     </div>
-</section>
+    <div class="col-md-6 form-group mt-3 mt-md-0">
+      <input
+        type="email"
+        class="form-control"
+        name="Email Address"
+        placeholder="Your Email"
+        required
+      />
+    </div>
+  </div>
+  <div class="form-group mt-3">
+    <input
+      type="text"
+      class="form-control"
+      name="Subject"
+      placeholder="Subject"
+      required
+    />
+  </div>
+  <div class="form-group mt-3">
+    <textarea
+      class="form-control"
+      name="Message"
+      rows="5"
+      placeholder="Message"
+      required
+    ></textarea>
+  </div>
+
+  <div class="my-3">
+    <div class="loading" style="display: none; padding: 10px; background: #e3f2fd; color: #1976d2; border-radius: 5px;">Sending...</div>
+    <div class="error-message" style="display: none; padding: 10px; background: #f8d7da; color: #721c24; border-radius: 5px;"></div>
+    <div class="sent-message" style="display: none; padding: 10px; background: #d4edda; color: #155724; border-radius: 5px;"></div>
+  </div>
+
+  <div class="form-submit">
+    <button type="submit" id="submitBtn">Send Message</button>
+    <div class="social-links">
+      <a href="https://www.facebook.com/MeritmindsOverseas" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-facebook"></i>
+      </a>
+      <a href="https://www.instagram.com/meritmindsoverseas" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/mmosuccess" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-linkedin"></i>
+      </a>
+    </div>
+  </div>
+</form>
+
 
 <!-- AOS Library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
@@ -372,73 +364,65 @@
 </script>
 
 <script>
+// AJAX Contact Form Handler
 document.addEventListener('DOMContentLoaded', function() {
-    const glassContactForm = document.getElementById('glass-contact-form');
-    const submitBtn = document.getElementById('submitBtn');
-    const formMessage = document.getElementById('formMessage');
+    const contactForm = document.getElementById('contact-form');
     
-    glassContactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Disable submit button
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
-        
-        // Hide any previous messages
-        formMessage.classList.remove('success', 'error');
-        formMessage.style.display = 'none';
-        
-        // Get form data
-        const formData = new FormData(glassContactForm);
-        
-        // Send form data using fetch API
-        fetch(glassContactForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Show success message
-                formMessage.textContent = '✓ Thank you! Your message has been sent successfully. We\'ll get back to you shortly.';
-                formMessage.classList.add('success');
-                formMessage.style.display = 'block';
-                
-                // Reset form
-                glassContactForm.reset();
-                
-                // Scroll to message
-                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                
-                // Re-enable button after 3 seconds
-                setTimeout(function() {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Application';
-                }, 3000);
-            } else {
-                throw new Error('Submission failed');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Show error message
-            formMessage.textContent = '✗ Oops! Something went wrong. Please try again or contact us directly.';
-            formMessage.classList.add('error');
-            formMessage.style.display = 'block';
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = form.querySelector('.loading');
+            const errorMessage = form.querySelector('.error-message');
+            const sentMessage = form.querySelector('.sent-message');
             
-            // Re-enable button
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane me-2"></i> Submit Application';
+            // Show loading
+            loading.style.display = 'block';
+            errorMessage.style.display = 'none';
+            sentMessage.style.display = 'none';
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
             
-            // Scroll to message
-            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Submit form using fetch
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = 'none';
+                
+                if (data.success) {
+                    sentMessage.style.display = 'block';
+                    sentMessage.innerHTML = '<strong>Success!</strong> Your message has been sent. We\'ll contact you within 24 hours!';
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        sentMessage.style.display = 'none';
+                    }, 8000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                errorMessage.style.display = 'block';
+                errorMessage.innerHTML = '<strong>Error!</strong> Could not send message. Please email us at info@meritminds.co.in';
+                console.error('Error:', error);
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Send Message';
+            });
         });
-    });
+    }
 });
 </script>
+
 
 <?php include 'footer.php'; ?>

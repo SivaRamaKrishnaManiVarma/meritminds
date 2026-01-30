@@ -1,82 +1,108 @@
 <?php include 'header.php'?>
 
-<!-- Hero Section with Orbit Animation -->
+<!-- Hero Section with Orbit Animation - FIXED ORBITS -->
+<!-- Updated HTML with Rotating Flags (except India) -->
 <section class="orbit-animation-section mt-0">
     <div class="container">
         <div class="row align-items-center">
             <!-- Left content -->
             <div class="col-lg-6 col-md-12 mb-4 mb-lg-0">
-                <h2 class="orbit-main-title">Study Abroad with Expert Guidance from MeritMinds</h2>
-                <p class="orbit-subtitle">
-                   Make your profile stand out by applying through MeritMinds. Get personalized support for your dream university.
-                </p>
+                <h2 class="orbit-main-title">
+                    study abroad<br>
+                    with expert<br>
+                    guidance from<br>
+                    <span class="highlight-text">international students</span>
+                </h2>
 
-                <!-- CTA Button -->
-                <div style="background:linear-gradient(135deg,#fc0511,#a30008);padding:24px 20px;border-radius:16px;box-shadow:0 10px 40px rgba(252, 5, 17, 0.25);margin-bottom:20px;">
-                    <h5 class="text-white text-center mb-3" style="font-size:18px;font-weight:600;">
-                        Interested in Studying Abroad?
-                    </h5>
-                    <button type="button" class="btn w-100 modal-trigger-btn" style="background:#fff;color:#fc0511;font-weight:700;border-radius:10px;padding:16px;border:none;font-size:18px;">
-                        Start Your Journey → 
-                    </button>
-                </div>
+                <!-- CTA Button - Refined Design -->
+                <button type="button" class="orbit-cta-btn modal-trigger-btn">
+                    Find my dream university
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="btn-arrow">
+                        <circle cx="12" cy="12" r="11" fill="white" opacity="0.2"/>
+                        <path d="M9 6L15 12L9 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
 
-                <!-- Stats -->
+                <!-- Stats Container -->
                 <div class="stats-container">
-                    <div class="stats-box-custom">
-                        <div class="stats-value-custom">1K+</div>
-                        <div class="stats-label-custom">universities</div>
+                    <div class="stats-box">
+                        <div class="stats-value">1K</div>
+                        <div class="stats-label">universities</div>
                     </div>
-                    <div class="stats-box-custom">
-                        <div class="stats-value-custom">51+</div>
-                        <div class="stats-label-custom">countries</div>
+                    <div class="stats-box">
+                        <div class="stats-value">300</div>
+                        <div class="stats-label">mentors</div>
                     </div>
-                    <div class="stats-box-custom">
-                        <div class="stats-value-custom">500+</div>
-                        <div class="stats-label-custom">success stories</div>
+                    <div class="stats-box">
+                        <div class="stats-value">51</div>
+                        <div class="stats-label">countries</div>
+                    </div>
+                    <div class="stats-box">
+                        <div class="stats-value">100+</div>
+                        <div class="stats-label">success stories</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right graphic -->
-            <div class="col-lg-6 col-md-12 mt-3">
+            <!-- Right graphic with rotating flags -->
+            <div class="col-lg-6 col-md-12">
                 <div class="orbit-wrapper">
-                    <div class="orbit-circle"></div>
-                    <div class="orbit-circle"></div>
+                    <!-- Animated Grid Background -->
+                    <div class="grid-background"></div>
 
-                    <!-- Center student -->
-                    <div class="main-card">
-                        <div class="main-card-inner">
-                            <div class="main-avatar" style="background-image: url('assets/imgs/picture3.jpg');"></div>
-                            <div class="main-name">Rahul</div>
-                            <div class="main-caption">Looking forward to joining Oxford University</div>
-                        </div>
+                    <!-- STATIC Orbit circles -->
+                    <div class="orbit-circle outer-circle"></div>
+                    <div class="orbit-circle middle-circle"></div>
+                    <div class="orbit-circle inner-circle"></div>
+
+                    <!-- Center person (Full image - Fixed) -->
+                    <div class="center-person">
+                        <img src="assets/imgs/picture3.jpg" alt="Student">
                     </div>
 
-                    <!-- Alumni card -->
-                    <div class="mini-card-fixed" style="position: absolute; top: -10%; left: 15%;">
-                        <div class="mini-card">
-                            <div class="mini-card-inner">
-                                <div class="mini-avatar" style="background-image: url('assets/imgs/picture6.jpg');"></div>
-                                <div class="mini-caption">Alumni from Cambridge University</div>
+                    <!-- Top-left card (Fixed) -->
+                    <div class="alumni-card">
+                        <img src="assets/imgs/picture6.jpg" alt="Alumni" class="card-avatar">
+                        <p class="card-text">Clarke is an alumni from Oxford University</p>
+                    </div>
+
+                    <!-- Bottom card (Fixed) -->
+                    <div class="bottom-card">
+                        <p class="card-text-bottom">Arnav looking forward to join Oxford University</p>
+                    </div>
+
+                    <!-- India flag - FIXED (NO ROTATION) -->
+                    <div class="flag-item india-flag">
+                        <img src="assets/imgs/flags/india.png" alt="India">
+                    </div>
+
+                    <!-- ROTATING FLAGS -->
+
+                    <!-- Outer orbit - germany & USA (ROTATING clockwise) -->
+                    <div class="orbit-path outer-orbit">
+                        <div class="orbit-flag germany-pos">
+                            <div class="flag-item counter-rotate">
+                                <img src="assets/imgs/flags/germany.png" alt="germany">
+                            </div>
+                        </div>
+                        <div class="orbit-flag usa-pos">
+                            <div class="flag-item counter-rotate">
+                                <img src="assets/imgs/flags/usa.png" alt="USA">
                             </div>
                         </div>
                     </div>
 
-                    <!-- Flags -->
-                    <div class="orbit-path flag-orbit-outer slow start-120">
-                        <div class="orbit-item">
-                            <div class="flag" style="background-image: url('assets/imgs/flags/germany.png');"></div>
+                    <!-- Middle orbit - UK & ireland (ROTATING counter-clockwise) -->
+                    <div class="orbit-path middle-orbit">
+                        <div class="orbit-flag uk-pos">
+                            <div class="flag-item counter-rotate-reverse">
+                                <img src="assets/imgs/flags/uk.png" alt="UK">
+                            </div>
                         </div>
-                    </div>
-                    <div class="orbit-path flag-orbit-middle fast start-90">
-                        <div class="orbit-item">
-                            <div class="flag" style="background-image: url('assets/imgs/flags/usa.png');"></div>
-                        </div>
-                    </div>
-                    <div class="orbit-path flag-orbit-inner reverse start-270">
-                        <div class="orbit-item">
-                            <div class="flag" style="background-image: url('assets/imgs/flags/uk.png');"></div>
+                        <div class="orbit-flag ireland-pos">
+                            <div class="flag-item counter-rotate-reverse">
+                                <img src="assets/imgs/flags/ireland.png" alt="ireland">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -84,6 +110,9 @@
         </div>
     </div>
 </section>
+
+
+
 
 <section class="masterx-section">
     <div class="container">
@@ -590,7 +619,7 @@
 </section>
 
 <!-- University Finder Section -->
-<section class="university-finder-section py-5">
+<!-- <section class="university-finder-section py-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
@@ -624,10 +653,10 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- Mentor Connect Section -->
-<section class="mentor-connect-section py-5 bg-light">
+<!-- <section class="mentor-connect-section py-5 bg-light">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2 mb-4 mb-lg-0">
@@ -663,7 +692,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 <!-- FAQ Section -->
 <div class="faq-section">
@@ -737,7 +766,7 @@
         </div>
     </div>
 </div>
-<div class="sk-ww-google-reviews" data-embed-id="25646060"></div><script src="https://widgets.sociablekit.com/google-reviews/widget.js" defer></script>
+<!-- <div class="sk-ww-google-reviews" data-embed-id="25646060"></div><script src="https://widgets.sociablekit.com/google-reviews/widget.js" defer></script> -->
 
 <!-- REVIEWS & CTA SECTION -->
 <section class="reviews-cta-section" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 60px 0;">
@@ -922,9 +951,7 @@
     </div>
 </div>
 
-<style>
 
-</style>
 <!-- Initialize AOS -->
 <script>
     AOS.init({

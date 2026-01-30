@@ -1829,575 +1829,661 @@
             display: block;
         }
     }
+/* ===========================
+   Orbit Hero Section Enhancements
+   =========================== */
 
-    /* ==========================
-       ORBIT ANIMATION SECTION - NEW
-    ===========================*/
-    .orbit-animation-section {
-        padding: 20px 0;
-        background: linear-gradient(135deg, #fff5f2 0%, #ffffff 100%);
-    }
-
-    .orbit-section-title {
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--primary-color);
-        margin-bottom: 10px;
-        font-weight: 600;
-    }
-
-    .orbit-main-title {
-        font-size: 32px;
-        line-height: 1.2;
-        margin-bottom: 14px;
-        color: #1a1a1a;
-    }
-
-    .orbit-subtitle {
-        font-size: 16px;
-        color: #666;
-        max-width: 400px;
-        margin-bottom: 24px;
-        line-height: 1.6;
-    }
-
-    .stats-box-custom {
-        background: #fff;
-        border-radius: 16px;
-        padding: 18px 22px;
-        display: inline-flex;
-        flex-direction: column;
-        gap: 4px;
-        box-shadow: 0 14px 40px rgba(252, 5, 17, 0.15);
-        border: 2px solid rgba(252, 5, 17, 0.1);
-    }
-
-    .stats-label-custom {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1.3px;
-        color: #9ca3af;
-    }
-
-    .stats-value-custom {
-        font-size: 22px;
-        font-weight: 600;
-        color: var(--primary-color);
-    }
-
-    .orbit-wrapper {
-        position: relative;
-        width: 360px;
-        height: 360px;
-        margin: 0 auto;
-    }
-
-    .orbit-circle {
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        border: 1px dashed rgba(252, 5, 17, 0.2);
-    }
-
-    .orbit-circle:nth-child(1) {
-        transform: scale(1.05);
-    }
-
-    .orbit-circle:nth-child(2) {
-        transform: scale(0.82);
-    }
-
-    /* Center card */
-    .main-card {
-        position: absolute;
-        inset: 50%;
-        transform: translate(-50%, -50%);
-        width: 230px;
-        height: 230px;
-        border-radius: 50%;
-        background: #fff;
-        box-shadow: 0 18px 55px rgba(252, 5, 17, 0.2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        z-index: 2;
-    }
-
-    .main-card-inner {
-        text-align: center;
-        padding: 15px;
-    }
-
-    .main-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    object-fit: cover;
+.orbit-animation-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);
+    position: relative;
+    overflow: hidden;
 }
 
-
-    .main-name {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--primary-color);
-    }
-
-    .main-caption {
-        font-size: 11px;
-        color: #6b7280;
-        line-height: 1.4;
-    }
-
-    /* ==== ORBIT ANIMATION CORE ==== */
-    .orbit-path {
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        animation: orbit 18s linear infinite;
-        transform-origin: center center;
-    }
-
-    .orbit-path.fast {
-        animation-duration: 12s;
-    }
-
-    .orbit-path.slow {
-        animation-duration: 24s;
-    }
-
-    .orbit-path.reverse {
-        animation-direction: reverse;
-    }
-
-    .orbit-item {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translateX(150px) translateY(-50%);
-    }
-
-    .orbit-item > * {
-        animation: counter-rotate 18s linear infinite;
-        transform-origin: center center;
-    }
-
-    .orbit-path.fast .orbit-item > * {
-        animation-duration: 12s;
-    }
-
-    .orbit-path.slow .orbit-item > * {
-        animation-duration: 24s;
-    }
-
-    @keyframes orbit {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    @keyframes counter-rotate {
-        from {
-            transform: rotate(0deg);
-        }
-        to {
-            transform: rotate(-360deg);
-        }
-    }
-
-    /* ==== Actual orbiting elements ==== */
-    .mini-card {
-        width: 110px;
-        height: 110px;
-        border-radius: 50%;
-        background: #fff;
-        box-shadow: 0 12px 36px rgba(252, 5, 17, 0.25);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    .mini-card-inner {
-        text-align: center;
-        padding: 10px;
-    }
-
-    .mini-avatar {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: #e5e7eb;
-        margin: 0 auto 6px;
-        background-size: cover;
-        background-position: center;
-    }
-
-    .mini-caption {
-        font-size: 10px;
-        color: #4b5563;
-        line-height: 1.3;
-    }
-
-    .flag {
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #e5e7eb;
-        box-shadow: 0 6px 16px rgba(252, 5, 17, 0.25);
-        background-size: cover;
-        background-position: center;
-    }
-
-    /* Different radii using translateX override */
-    .orbit-path.flag-orbit .orbit-item {
-        transform: translateX(175px) translateY(-50%);
-    }
-
-    .orbit-path.inner-orbit .orbit-item {
-        transform: translateX(135px) translateY(-50%);
-    }
-
-  /* Different orbit radii for flags */
-    .orbit-path.flag-orbit-outer .orbit-item {
-        transform: translateX(175px) translateY(-50%);
-    }
-
-    .orbit-path.flag-orbit-middle .orbit-item {
-        transform: translateX(135px) translateY(-10%);
-    }
-
-    .orbit-path.flag-orbit-inner .orbit-item {
-        transform: translateX(175px) translateY(-50%);
-    }
-
-    /* Add a start position for start-20 */
-    .orbit-path.start-20 {
-        transform: rotate(20deg);
-    }
-
-    .orbit-path.start-90 {
-        transform: rotate(90deg);
-    }
-
-    .orbit-path.start-270 {
-        transform: rotate(270deg);
-    }
-
-    /* Bottom pill fixed, no orbit */
-    .bottom-pill {
-        position: absolute;
-        bottom: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #fff;
-        border-radius: 999px;
-        padding: 6px 14px;
-        font-size: 10px;
-        color: #4b5563;
-        box-shadow: 0 10px 28px rgba(252, 5, 17, 0.2);
-        white-space: nowrap;
-        z-index: 3;
-    }
-
-    @media (max-width: 991px) {
-        .orbit-animation-section {
-            padding: 40px 0;
-        }
-        .orbit-wrapper {
-            width: 300px;
-            height: 300px;
-            margin-top: 30px;
-        }
-        .main-card {
-            width: 200px;
-            height: 200px;
-        }
-        .main-avatar {
-            width: 100px;
-            height: 100px;
-        }
-        .orbit-path.flag-orbit .orbit-item {
-            transform: translateX(145px) translateY(-50%);
-        }
-        .orbit-path.inner-orbit .orbit-item {
-            transform: translateX(155px) translateY(-50%);
-        }
-    }
-
-    @media (max-width: 767px) {
-        .orbit-main-title {
-            font-size: 24px;
-        }
-        .orbit-subtitle {
-            font-size: 14px;
-        }
-        .orbit-wrapper {
-            width: 280px;
-            height: 280px;
-        }
-        .orbit-path.flag-orbit .orbit-item {
-            transform: translateX(135px) translateY(-50%);
-        }
-    }
-
-
-/* Updated Stats Box Styling - Red Theme with Separators */
-.stats-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-    margin-top: 25px;
-    background: linear-gradient(135deg,     #ffe5e5 0%, #ffd5d5 100%);
-    border-radius: 24px;
-    padding: 28px 20px;
-    box-shadow: 0 4px 20px rgba(252, 5, 17, 0.15);
-    justify-content: space-around;
-    align-items: center;
-}
-
-.stats-box-custom {
-    background: transparent;
-    border-radius: 0;
-    padding: 20px 30px;
-    display: inline-flex;
-    flex-direction: column;
-    gap: 8px;
-    box-shadow: none;
-    border: none;
-    border-right: 2px solid rgba(252, 5, 17, 0.2);
-    text-align: center;
-    min-width: 140px;
-    flex: 1;
-    transition: all 0.3s ease;
-}
-
-.stats-box-custom:last-child {
-    border-right: none;
-}
-
-.stats-box-custom:hover {
-    transform: scale(1.05);
-}
-
-.stats-value-custom {
-    font-size: 40px;
+/* Left Content */
+.orbit-main-title {
+    font-size: 52px;
     font-weight: 700;
-    color: #4a1a4a;
-    line-height: 1;
+    line-height: 1.15;
+    margin-bottom: 35px;
+    color: #004aad; /* Dark Blue */
     letter-spacing: -1px;
 }
 
-.stats-label-custom {
-    font-size: 15px;
-    text-transform: lowercase;
-    letter-spacing: 0.3px;
-    color: #6b2d6b;
-    font-weight: 500;
-    line-height: 1.2;
+.highlight-text {
+    color: #22b7cb; /* Light Blue */
 }
 
-/* Responsive adjustments */
-@media (max-width: 991px) {
-    .stats-container {
-        padding: 24px 15px;
-    }
-    
-    .stats-box-custom {
-        padding: 18px 20px;
-        min-width: 120px;
-    }
-    
-    .stats-value-custom {
-        font-size: 32px;
-    }
-    
-    .stats-label-custom {
-        font-size: 13px;
-    }
-}
-
-@media (max-width: 767px) {
-    .stats-container {
-        flex-direction: column;
-        gap: 0;
-        padding: 20px 15px;
-    }
-    
-    .stats-box-custom {
-        padding: 20px;
-        min-width: 100%;
-        border-right: none;
-        border-bottom: 2px solid rgba(252, 5, 17, 0.2);
-    }
-    
-    .stats-box-custom:last-child {
-        border-bottom: none;
-    }
-    
-    .stats-value-custom {
-        font-size: 36px;
-    }
-    
-    .stats-label-custom {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 480px) {
-    .stats-value-custom {
-        font-size: 30px;
-    }
-}
-/* =====================================================
-   ADDITIONAL CSS FOR ADMITKARD-STYLE RESTRUCTURE
-   Add this to your existing CSS file
- 
-/* ===========================
-   UNIVERSITY FINDER SECTION
-   =========================== */
-.university-finder-section {
-    background: #fff;
-    position: relative;
-}
-
-.finder-image-wrapper img {
-    border-radius: 20px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
-}
-
-.finder-features {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.finder-feature-item {
-    display: flex;
+/* Refined CTA Button */
+.orbit-cta-btn {
+    background: linear-gradient(135deg, #004aad 0%, #0062e0 100%);
+    color: white;
+    padding: 18px 36px;
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
     align-items: center;
-    font-size: 16px;
-    color: #4a5568;
-    padding: 12px 0;
+    gap: 12px;
+    margin-bottom: 35px;
+    box-shadow: 0 8px 24px rgba(0, 74, 173, 0.25);
+    position: relative;
+    overflow: hidden;
 }
 
-.finder-feature-item i {
-    font-size: 20px;
-    font-weight: 700;
+.orbit-cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
 }
 
-/* ===========================
-   MENTOR CONNECT SECTION
-   =========================== */
-.mentor-connect-section {
-    background: linear-gradient(135deg, #fff5f2 0%, #ffffff 100%);
+.orbit-cta-btn:hover::before {
+    left: 100%;
 }
 
-.mentor-image-wrapper img {
-    border-radius: 20px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+.orbit-cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0, 74, 173, 0.35);
 }
 
-.mentor-stat-box {
-    background: #fff;
-    padding: 24px 20px;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(252, 5, 17, 0.1);
+.orbit-cta-btn:active {
+    transform: translateY(-1px);
 }
 
-.mentor-stat-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 35px rgba(252, 5, 17, 0.15);
+.btn-arrow {
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
-/* ===========================
-   ABOUT SECTION (SIMPLIFIED)
-   =========================== */
-.about-section {
-    background: #fff;
+.orbit-cta-btn:hover .btn-arrow {
+    transform: translateX(4px);
 }
 
-.about-values {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-/* ===========================
-   STATS CONTAINER IMPROVEMENTS
-   =========================== */
+/* Stats Container */
 .stats-container {
     display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-top: 30px;
+    gap: 0;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f0f9ff 100%);
+    border-radius: 20px;
+    padding: 24px 16px;
+    box-shadow: 0 4px 20px rgba(0, 74, 173, 0.1);
 }
 
-.stats-box-custom {
+.stats-box {
     flex: 1;
-    min-width: 120px;
+    text-align: center;
+    padding: 12px 8px;
+    border-right: 2px solid rgba(0, 74, 173, 0.15);
 }
 
-/* ===========================
-   SECTION TITLE IMPROVEMENTS
+.stats-box:last-child {
+    border-right: none;
+}
+
+.stats-value {
+    font-size: 36px;
+    font-weight: 700;
+    color: #004aad;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.stats-label {
+    font-size: 13px;
+    color: #22b7cb;
+    text-transform: lowercase;
+    font-weight: 500;
+}
+
+/* ==========================
+   ORBIT WRAPPER WITH GRID
    =========================== */
-.section-main-subtitle {
-    font-size: 24px;
-    font-weight: 600;
-    color: #1a1a1a;
+
+.orbit-wrapper {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+/* Animated Grid Background */
+.grid-background {
+    position: absolute;
+    inset: -50px;
+    background-image: 
+        linear-gradient(rgba(0, 74, 173, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 74, 173, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    border-radius: 50%;
+    z-index: 1;
+    animation: grid-pulse 3s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes grid-pulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+    }
+}
+
+/* STATIONARY Orbit circles */
+.orbit-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px dashed rgba(0, 74, 173, 0.2);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.outer-circle {
+    width: 480px;
+    height: 480px;
+}
+
+.middle-circle {
+    width: 360px;
+    height: 360px;
+}
+
+.inner-circle {
+    width: 240px;
+    height: 240px;
+}
+
+/* Center person */
+.center-person {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    border: 6px solid white;
+}
+
+.center-person img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Alumni card */
+.alumni-card {
+    position: absolute;
+    top: 8%;
+    left: 2%;
+    z-index: 20;
+    background: white;
+    padding: 10px 16px;
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 240px;
+}
+
+.card-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.card-text {
+    font-size: 12px;
+    color: #004aad;
+    margin: 0;
     line-height: 1.4;
+    font-weight: 500;
 }
 
-.masked-text {
-    background: linear-gradient(135deg, #fc0511, #a30008);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: inline-block;
+/* Bottom card */
+.bottom-card {
+    position: absolute;
+    bottom: 6%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
+.card-text-bottom {
+    font-size: 12px;
+    color: #004aad;
+    margin: 0;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+/* ==========================
+   FLAG ITEMS
+   =========================== */
+
+.flag-item {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 3px solid white;
+}
+
+.flag-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* ==========================
+   ORBIT PATHS - POSITIONED ON CIRCLES
+   =========================== */
+
+.orbit-path {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+/* Outer orbit - 480px diameter */
+.outer-orbit {
+    width: 480px;
+    height: 480px;
+    margin-left: -240px;
+    margin-top: -240px;
+    animation: orbit-rotate 25s linear infinite;
+}
+
+/* Middle orbit - 360px diameter */
+.middle-orbit {
+    width: 360px;
+    height: 360px;
+    margin-left: -180px;
+    margin-top: -180px;
+    animation: orbit-rotate-reverse 20s linear infinite;
+}
+
+/* Flag positioning - CENTERED ON ORBIT CIRCLES */
+.orbit-flag {
+    position: absolute;
+}
+
+/* Outer orbit positions - ON 480px CIRCLE */
+.germany-pos {
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.usa-pos {
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Middle orbit positions - ON 360px CIRCLE */
+.uk-pos {
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.ireland-pos {
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* India flag - FIXED ON LEFT SIDE OF CENTER PERSON */
+.india-flag {
+    position: absolute;
+    left: calc(50% - 140px - 24px); /* Center - half of person width - half of flag size */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 15;
+}
+
+/* Counter-rotate animations */
+.counter-rotate {
+    animation: counter-rotate 25s linear infinite;
+}
+
+.counter-rotate-reverse {
+    animation: counter-rotate-reverse 20s linear infinite;
+}
+
+/* ==========================
+   ANIMATIONS
+   =========================== */
+
+@keyframes orbit-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-rotate-reverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes counter-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes counter-rotate-reverse {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 991px) {
+    .orbit-main-title {
+        font-size: 42px;
+    }
+
+    .orbit-wrapper {
+        width: 400px;
+        height: 400px;
+    }
+
+    .outer-circle {
+        width: 380px;
+        height: 380px;
+    }
+
+    .middle-circle {
+        width: 280px;
+        height: 280px;
+    }
+
+    .inner-circle {
+        width: 180px;
+        height: 180px;
+    }
+
+    .center-person {
+        width: 220px;
+        height: 220px;
+    }
+
+    .flag-item {
+        width: 40px;
+        height: 40px;
+    }
+
+    .outer-orbit {
+        width: 380px;
+        height: 380px;
+        margin-left: -190px;
+        margin-top: -190px;
+    }
+
+    .middle-orbit {
+        width: 280px;
+        height: 280px;
+        margin-left: -140px;
+        margin-top: -140px;
+    }
+
+    .germany-pos {
+        top: -20px;
+    }
+
+    .usa-pos {
+        bottom: -20px;
+    }
+
+    .uk-pos {
+        left: -20px;
+    }
+
+    .ireland-pos {
+        right: -20px;
+    }
+
+    .india-flag {
+        left: calc(50% - 110px - 20px);
+    }
+}
 
 @media (max-width: 767px) {
-   
-
-
+    .orbit-animation-section {
+        padding: 40px 0;
+    }
 
     .orbit-main-title {
-        font-size: 26px;
+        font-size: 36px;
+        margin-bottom: 25px;
     }
 
-    .orbit-subtitle {
+    .orbit-cta-btn {
+        padding: 15px 28px;
         font-size: 15px;
+        width: 100%;
+        justify-content: center;
     }
 
-    .stats-box-custom {
-        min-width: 100px;
-        padding: 14px 18px;
+    .stats-container {
+        flex-wrap: wrap;
+        padding: 20px 12px;
     }
 
-    .stats-value-custom {
-        font-size: 20px;
+    .stats-box {
+        flex: 1 1 45%;
+        border-right: 2px solid rgba(0, 74, 173, 0.15);
+        border-bottom: 2px solid rgba(0, 74, 173, 0.15);
+        padding: 15px 8px;
     }
 
-    .stats-label-custom {
-        font-size: 11px;
+    .stats-box:nth-child(2n) {
+        border-right: none;
     }
 
-    .section-main-subtitle {
-        font-size: 20px;
+    .stats-box:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+
+    .stats-value {
+        font-size: 28px;
+    }
+
+    .stats-label {
+        font-size: 12px;
+    }
+
+    .orbit-wrapper {
+        width: 320px;
+        height: 320px;
+        margin-top: 30px;
+    }
+
+    .outer-circle {
+        width: 300px;
+        height: 300px;
+    }
+
+    .middle-circle {
+        width: 220px;
+        height: 220px;
+    }
+
+    .inner-circle {
+        width: 140px;
+        height: 140px;
+    }
+
+    .center-person {
+        width: 180px;
+        height: 180px;
+    }
+
+    .flag-item {
+        width: 36px;
+        height: 36px;
+    }
+
+    .outer-orbit {
+        width: 300px;
+        height: 300px;
+        margin-left: -150px;
+        margin-top: -150px;
+    }
+
+    .middle-orbit {
+        width: 220px;
+        height: 220px;
+        margin-left: -110px;
+        margin-top: -110px;
+    }
+
+    .germany-pos {
+        top: -18px;
+    }
+
+    .usa-pos {
+        bottom: -18px;
+    }
+
+    .uk-pos {
+        left: -18px;
+    }
+
+    .ireland-pos {
+        right: -18px;
+    }
+
+    .india-flag {
+        left: calc(50% - 90px - 18px);
+    }
+
+    .alumni-card {
+        max-width: 180px;
+        padding: 8px 12px;
+    }
+
+    .card-avatar {
+        width: 32px;
+        height: 32px;
+    }
+
+    .card-text,
+    .card-text-bottom {
+        font-size: 10px;
     }
 }
 
+@media (max-width: 576px) {
+    .orbit-main-title {
+        font-size: 30px;
+    }
 
+    .orbit-cta-btn {
+        padding: 14px 24px;
+        font-size: 14px;
+    }
+
+    .stats-value {
+        font-size: 24px;
+    }
+
+    .orbit-wrapper {
+        width: 280px;
+        height: 280px;
+    }
+
+    .center-person {
+        width: 160px;
+        height: 160px;
+    }
+
+    .outer-circle {
+        width: 260px;
+        height: 260px;
+    }
+
+    .middle-circle {
+        width: 190px;
+        height: 190px;
+    }
+
+    .inner-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .flag-item {
+        width: 32px;
+        height: 32px;
+    }
+
+    .outer-orbit {
+        width: 260px;
+        height: 260px;
+        margin-left: -130px;
+        margin-top: -130px;
+    }
+
+    .middle-orbit {
+        width: 190px;
+        height: 190px;
+        margin-left: -95px;
+        margin-top: -95px;
+    }
+
+    .germany-pos {
+        top: -16px;
+    }
+
+    .usa-pos {
+        bottom: -16px;
+    }
+
+    .uk-pos {
+        left: -16px;
+    }
+
+    .ireland-pos {
+        right: -16px;
+    }
+
+    .india-flag {
+        left: calc(50% - 80px - 16px);
+    }
+}
 /* ===========================
    SMOOTH SCROLL BEHAVIOR
    =========================== */
@@ -2623,7 +2709,7 @@ section {
 }
 
 .blue-card .service-pastel-btn:hover {
-    color: #d21c31;
+    color: #004aad;
     box-shadow: 0 4px 12px rgba(0, 74, 173, 0.3);
 }
 
