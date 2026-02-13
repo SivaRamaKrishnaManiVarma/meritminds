@@ -23,25 +23,95 @@
                     </svg>
                 </button>
 
-                <!-- Stats Container -->
+             <!-- Stats Container with Animated Counter -->
                 <div class="stats-container">
                     <div class="stats-box">
-                        <div class="stats-value">1K</div>
+                        <div class="stats-value" data-target="1000" data-suffix="K">0</div>
                         <div class="stats-label">universities</div>
                     </div>
                     <div class="stats-box">
-                        <div class="stats-value">300</div>
+                        <div class="stats-value" data-target="300">0</div>
                         <div class="stats-label">mentors</div>
                     </div>
                     <div class="stats-box">
-                        <div class="stats-value">51</div>
+                        <div class="stats-value" data-target="51">0</div>
                         <div class="stats-label">countries</div>
                     </div>
                     <div class="stats-box">
-                        <div class="stats-value">100+</div>
+                        <div class="stats-value" data-target="100" data-suffix="+">0</div>
                         <div class="stats-label">success stories</div>
                     </div>
                 </div>
+
+                <script>
+                // Animated Counter Function
+                function animateCounter(element, target, duration = 2000) {
+                    const suffix = element.getAttribute('data-suffix') || '';
+                    const start = 0;
+                    const increment = target / (duration / 16); // 60fps
+                    let current = start;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+
+                        // Format the number
+                        let displayValue = Math.floor(current);
+
+                        // For "K" suffix, show as "1K" when reached 1000
+                        if (suffix === 'K' && current >= 1000) {
+                            displayValue = '1K';
+                        } else if (suffix === 'K') {
+                            displayValue = Math.floor(current);
+                        } else {
+                            displayValue = Math.floor(current) + suffix;
+                        }
+
+                        element.textContent = displayValue;
+                    }, 16);
+                }
+
+                // Intersection Observer to trigger animation when stats come into view
+                const observerOptions = {
+                    threshold: 0.5,
+                    rootMargin: '0px'
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const statsValues = entry.target.querySelectorAll('.stats-value');
+
+                            statsValues.forEach(stat => {
+                                const target = parseInt(stat.getAttribute('data-target'));
+                                animateCounter(stat, target);
+                            });
+
+                            // Unobserve after animation starts (run only once)
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+
+                // Start observing when DOM is loaded
+                document.addEventListener('DOMContentLoaded', () => {
+                    const statsContainer = document.querySelector('.stats-container');
+                    if (statsContainer) {
+                        observer.observe(statsContainer);
+                    }
+                });
+                </script>
+
+                <style>
+                /* Optional: Add transition effect */
+                .stats-value {
+                    transition: all 0.3s ease;
+                }
+                </style>
             </div>
 
             <!-- Right graphic with rotating flags -->
@@ -118,9 +188,13 @@
     <div class="container">
         <!-- Header -->
         <div class="text-center mb-4">
-            <h2>Merit<span> Minds</span></h2>
-            <p>one stop solution for all your study abroad needs</p>
+            <!-- <h2>Merit<span> Minds</span></h2>
+            <p>one stop solution for all your study abroad needs</p> -->
+             <h2 class="services-main-title" style="font-size:36px; font-weight:700; color:#004aad;">
+                Merit<span style="color:#d21c31;">Minds</span>
+            </h2>
         </div>
+        
 
         <!-- Hero Image -->
         <div class="masterx-hero-wrapper">
@@ -315,9 +389,12 @@
 <!-- Hear From Our Students Section -->
 <section class="video-testimonials-section py-5">
     <div class="container">
-        <h2 class="section-title text-center mb-2" style="font-size:32px; font-weight:700; color:#2d3748;">
+        <!-- <h2 class="section-title text-center mb-2" style="font-size:32px; font-weight:700; color:#2d3748;">
             Hear from our students
-        </h2>
+        </h2> -->
+        <h2 class="services-main-title" style="font-size:36px; font-weight:700; color:#004aad;">
+                Hear from our <span style="color:#d21c31;">students</span>
+            </h2>
         
         
         <div class="testimonial-carousel-wrapper position-relative">
@@ -693,7 +770,109 @@
         </div>
     </div>
 </section> -->
+<!-- Blogs Section - MeritMinds Theme -->
+<section class="blogs-section" style="padding: 80px 0; background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 100%);">
+    <div class="container">
+        <!-- Section Header -->
+        <div class="blogs-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px;">
+            <h2 style="font-size: 48px; font-weight: 700; color: #004aad; margin: 0;">Blogs</h2>
+            <a href="blogs.php" class="view-all-btn" style="color: #004aad; font-size: 16px; text-decoration: none; font-weight: 600; padding: 10px 25px; border: 2px solid #004aad; border-radius: 25px; transition: all 0.3s;">
+                view all
+            </a>
+        </div>
 
+        <!-- Blog Cards Grid -->
+        <div class="row">
+            <!-- Blog Card 1 - Light Blue Background -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="blog-card" style="background: linear-gradient(135deg, #e3f2fd 0%, #f0f9ff 100%); border-radius: 24px; padding: 40px; height: 100%; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
+                    <!-- Read Time Badge -->
+                    <span class="read-time" style="display: inline-block; background: white; color: #004aad; font-size: 14px; font-weight: 600; padding: 8px 20px; border-radius: 20px; margin-bottom: 25px;">22 min read</span>
+
+                    <!-- Blog Title & Subtitle -->
+                    <h3 style="font-size: 28px; font-weight: 700; color: #004aad; margin-bottom: 8px; line-height: 1.3;">Best SOP for Master (MS)</h3>
+                    <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">in Data Science</p>
+
+                    <!-- Illustration -->
+                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                        <img src="assets/imgs/blog-data-science.png" alt="Data Science" style="max-width: 250px; height: auto;">
+                    </div>
+
+                    <!-- Arrow Icon -->
+                    <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
+                        <i class="fas fa-arrow-right" style="color: #004aad;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 2 - Light Peach Background -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="blog-card" style="background: linear-gradient(135deg, #fff3e0 0%, #ffebcc 100%); border-radius: 24px; padding: 40px; height: 100%; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
+                    <!-- Read Time Badge -->
+                    <span class="read-time" style="display: inline-block; background: white; color: #004aad; font-size: 14px; font-weight: 600; padding: 8px 20px; border-radius: 20px; margin-bottom: 25px;">9 min read</span>
+
+                    <!-- Blog Title -->
+                    <h3 style="font-size: 28px; font-weight: 700; color: #004aad; margin-bottom: 8px; line-height: 1.3;">PTE score required for</h3>
+                    <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">Australia</p>
+
+                    <!-- Illustration -->
+                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                        <img src="assets/imgs/blog-english.png" alt="PTE Australia" style="max-width: 250px; height: auto;">
+                    </div>
+
+                    <!-- Arrow Icon -->
+                    <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
+                        <i class="fas fa-arrow-right" style="color: #004aad;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 3 - Light Mint Background -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="blog-card" style="background: linear-gradient(135deg, #e0f7f4 0%, #b2ebf2 100%); border-radius: 24px; padding: 40px; height: 100%; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
+                    <!-- Read Time Badge -->
+                    <span class="read-time" style="display: inline-block; background: white; color: #004aad; font-size: 14px; font-weight: 600; padding: 8px 20px; border-radius: 20px; margin-bottom: 25px;">10 min read</span>
+
+                    <!-- Blog Title -->
+                    <h3 style="font-size: 28px; font-weight: 700; color: #004aad; margin-bottom: 8px; line-height: 1.3;">Career objective for MBA</h3>
+                    <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">template</p>
+
+                    <!-- Illustration -->
+                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                        <img src="assets/imgs/blog-mba.png" alt="MBA Career" style="max-width: 200px; height: auto;">
+                    </div>
+
+                    <!-- Arrow Icon -->
+                    <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
+                        <i class="fas fa-arrow-right" style="color: #004aad;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 4 - Light Lavender Background -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="blog-card" style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); border-radius: 24px; padding: 40px; height: 100%; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;">
+                    <!-- Read Time Badge -->
+                    <span class="read-time" style="display: inline-block; background: white; color: #004aad; font-size: 14px; font-weight: 600; padding: 8px 20px; border-radius: 20px; margin-bottom: 25px;">16 min read</span>
+
+                    <!-- Blog Title -->
+                    <h3 style="font-size: 28px; font-weight: 700; color: #004aad; margin-bottom: 8px; line-height: 1.3;">Best 42 courses in Canada</h3>
+                    <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">after 12th</p>
+
+                    <!-- Illustration -->
+                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                        <img src="assets/imgs/blog-canada.png" alt="Canada Courses" style="max-width: 250px; height: auto;">
+                    </div>
+
+                    <!-- Arrow Icon -->
+                    <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
+                        <i class="fas fa-arrow-right" style="color: #004aad;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <!-- FAQ Section -->
 <div class="faq-section">
 
@@ -819,137 +998,177 @@
     </div>
 </section>
 
-<!-- MODAL POPUP -->
-<div id="studyModal" class="modal-overlay" style="display: none;">
+<div id="studyModal" class="modal-overlay" style="display:none">
     <div class="modal-content">
         <button class="modal-close" onclick="closeModal()">&times;</button>
-
-        <!-- Progress Bar -->
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar"></div>
+        
+        <!-- LEFT SIDE: Animated Loader -->
+        <div class="modal-animation-side">
+            <div class="side-loader">
+                <div class="side-loader-orbit-ring"></div>
+                <div class="side-loader-center"></div>
+                <div class="side-loader-orbit">
+                    <div class="side-loader-dot side-loader-dot-1"></div>
+                    <div class="side-loader-dot side-loader-dot-2"></div>
+                    <div class="side-loader-dot side-loader-dot-3"></div>
+                </div>
+            </div>
+            
+            <div class="side-text">
+                <h3>Start Your Journey</h3>
+                <p>Fill out the form to get personalized guidance from our expert counselors</p>
+            </div>
+            
+            <div class="side-features">
+                <div class="side-feature-item">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#004aad" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>1000+ Universities</span>
+                </div>
+                <div class="side-feature-item">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#22b7cb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Expert Visa Assistance</span>
+                </div>
+                <div class="side-feature-item">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#d21c31" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>100% Success Stories</span>
+                </div>
+            </div>
         </div>
-
-        <form id="studyAbroadForm" method="POST">
-            <!-- Step 1: Personal Information -->
-            <div class="form-step" data-step="1">
-                <h3 class="form-step-title">Personal Information</h3>
-                <p class="form-step-subtitle">Let's start with your basic details</p>
-
-                <div class="form-group">
-                    <label>Full Name <span class="required">*</span></label>
-                    <input type="text" name="fullname" required placeholder="Enter your full name">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email <span class="required">*</span></label>
-                        <input type="email" name="email" required placeholder="your.email@example.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number <span class="required">*</span></label>
-                        <input type="tel" name="phone" required placeholder="+91 9876543210">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Current City <span class="required">*</span></label>
-                    <input type="text" name="city" required placeholder="Enter your city">
-                </div>
-
-                <button type="button" class="btn-next" onclick="nextStep()">Next Step</button>
+        
+        <!-- RIGHT SIDE: Form -->
+        <div class="modal-form-side">
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
 
-            <!-- Step 2: Academic Background -->
-            <div class="form-step" data-step="2" style="display: none;">
-                <h3 class="form-step-title">Academic Background</h3>
-                <p class="form-step-subtitle">Tell us about your education</p>
-
-                <div class="form-group">
-                    <label>Highest Qualification <span class="required">*</span></label>
-                    <select name="qualification" required>
-                        <option value="">Select qualification</option>
-                        <option value="High School">High School (12th Grade)</option>
-                        <option value="Bachelors">Bachelor's Degree</option>
-                        <option value="Masters">Master's Degree</option>
-                        <option value="PhD">PhD</option>
-                    </select>
-                </div>
-
-                <div class="form-row">
+            <form id="studyAbroadForm" method="POST">
+                <!-- Step 1 -->
+                <div class="form-step" data-step="1">
+                    <h3 class="form-step-title">Personal Information</h3>
+                    <p class="form-step-subtitle">Let's start with your basic details</p>
+                    
                     <div class="form-group">
-                        <label>Field of Study <span class="required">*</span></label>
-                        <input type="text" name="fieldofstudy" required placeholder="e.g., Computer Science">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" name="fullname" required placeholder="Enter your full name">
                     </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email <span class="required">*</span></label>
+                            <input type="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number <span class="required">*</span></label>
+                            <input type="tel" name="phone" required placeholder="+91 9876543210">
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
-                        <label>CGPA/Percentage <span class="required">*</span></label>
-                        <input type="text" name="cgpa" required placeholder="e.g., 8.5 CGPA or 85%">
+                        <label>Current City <span class="required">*</span></label>
+                        <input type="text" name="city" required placeholder="Enter your city">
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label>English Test Score (if any)</label>
-                    <input type="text" name="englishscore" placeholder="e.g., IELTS 7.5, TOEFL 100">
-                </div>
-
-                <div class="form-buttons">
-                    <button type="button" class="btn-prev" onclick="prevStep()">← Previous</button>
+                    
                     <button type="button" class="btn-next" onclick="nextStep()">Next Step</button>
                 </div>
-            </div>
 
-            <!-- Step 3: Study Preferences -->
-            <div class="form-step" data-step="3" style="display: none;">
-                <h3 class="form-step-title">Study Preferences</h3>
-                <p class="form-step-subtitle">What are you looking for?</p>
-
-                <div class="form-group">
-                    <label>Preferred Country <span class="required">*</span></label>
-                    <select name="preferredcountry" required>
-                        <option value="">Select country</option>
-                        <option value="USA">USA</option>
-                        <option value="UK">UK</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Germany">Germany</option>
-                        <option value="Ireland">Ireland</option>
-                        <option value="New Zealand">New Zealand</option>
-                        <option value="Other">Other</option>
-                    </select>
+                <!-- Step 2 -->
+                <div class="form-step" data-step="2" style="display:none">
+                    <h3 class="form-step-title">Academic Background</h3>
+                    <p class="form-step-subtitle">Tell us about your education</p>
+                    
+                    <div class="form-group">
+                        <label>Highest Qualification <span class="required">*</span></label>
+                        <select name="qualification" required>
+                            <option value="">Select qualification</option>
+                            <option value="High School">High School (12th Grade)</option>
+                            <option value="Bachelors">Bachelor's Degree</option>
+                            <option value="Masters">Master's Degree</option>
+                            <option value="PhD">PhD</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Field of Study <span class="required">*</span></label>
+                            <input type="text" name="fieldofstudy" required placeholder="e.g., Computer Science">
+                        </div>
+                        <div class="form-group">
+                            <label>CGPA/Percentage <span class="required">*</span></label>
+                            <input type="text" name="cgpa" required placeholder="e.g., 8.5 CGPA or 85%">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>English Test Score (if any)</label>
+                        <input type="text" name="englishscore" placeholder="e.g., IELTS 7.5, TOEFL 100">
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn-next" onclick="nextStep()">Next Step</button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Preferred Course/Program <span class="required">*</span></label>
-                    <input type="text" name="preferredcourse" required placeholder="e.g., MS in Data Science">
+                <!-- Step 3 -->
+                <div class="form-step" data-step="3" style="display:none">
+                    <h3 class="form-step-title">Study Preferences</h3>
+                    <p class="form-step-subtitle">What are you looking for?</p>
+                    
+                    <div class="form-group">
+                        <label>Preferred Country <span class="required">*</span></label>
+                        <select name="preferredcountry" required>
+                            <option value="">Select country</option>
+                            <option value="USA">USA</option>
+                            <option value="UK">UK</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Germany">Germany</option>
+                            <option value="Ireland">Ireland</option>
+                            <option value="New Zealand">New Zealand</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Preferred Course/Program <span class="required">*</span></label>
+                        <input type="text" name="preferredcourse" required placeholder="e.g., MS in Data Science">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Intake Year <span class="required">*</span></label>
+                        <select name="intakeyear" required>
+                            <option value="">Select intake year</option>
+                            <option value="2026">2026</option>
+                            <option value="2027">2027</option>
+                            <option value="2028">2028</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Any specific requirements or questions?</label>
+                        <textarea name="message" rows="4" placeholder="Share any specific questions or requirements..."></textarea>
+                    </div>
+                    
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="New Study Abroad Application">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-buttons">
+                        <button type="button" class="btn-prev" onclick="prevStep()">Previous</button>
+                        <button type="submit" class="btn-submit">Submit Application</button>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Intake Year <span class="required">*</span></label>
-                    <select name="intakeyear" required>
-                        <option value="">Select intake year</option>
-                        <option value="2026">2026</option>
-                        <option value="2027">2027</option>
-                        <option value="2028">2028</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Any specific requirements or questions?</label>
-                    <textarea name="message" rows="4" placeholder="Share any specific questions or requirements..."></textarea>
-                </div>
-
-                <!-- Hidden fields for FormSubmit.co -->
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_subject" value="New Study Abroad Application">
-                <input type="hidden" name="_template" value="table">
-
-                <div class="form-buttons">
-                    <button type="button" class="btn-prev" onclick="prevStep()">← Previous</button>
-                    <button type="submit" class="btn-submit">Submit Application</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
+
 
 
 <!-- Initialize AOS -->
@@ -1138,31 +1357,182 @@
     .modal-content {
         background: #fff;
         border-radius: 20px;
-        max-width: 600px;
+        max-width: 1100px;
         width: 100%;
         position: relative;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        padding: 40px 30px;
+        padding: 0;
         margin: auto;
         max-height: 90vh;
-        overflow-y: auto;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 350px 1fr;
     }
 
     .modal-close {
         position: absolute;
         top: 15px;
         right: 15px;
-        background: transparent;
+        background: rgba(255, 255, 255, 0.9);
         border: none;
-        font-size: 32px;
-        color: #999;
+        font-size: 28px;
+        color: #666;
         cursor: pointer;
-        transition: color 0.3s;
+        transition: all 0.3s;
         z-index: 10;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
     }
 
     .modal-close:hover {
         color: #fc0511;
+        background: #fff;
+        transform: rotate(90deg);
+    }
+
+    /* LEFT SIDE: Animation */
+    .modal-animation-side {
+        background: linear-gradient(135deg, #e8f4ff 0%, #d4e9ff 100%);
+        padding: 40px 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px 0 0 20px;
+    }
+
+    /* RIGHT SIDE: Form */
+    .modal-form-side {
+        padding: 40px 35px;
+        overflow-y: auto;
+        max-height: 90vh;
+    }
+
+    /* Animated Loader */
+    .side-loader {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        margin-bottom: 35px;
+    }
+
+    .side-loader-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 45px;
+        height: 45px;
+        background: #004aad;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: pulse-center 1.5s ease-in-out infinite;
+        box-shadow: 0 0 35px rgba(0, 74, 173, 0.5);
+    }
+
+    .side-loader-orbit-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 140px;
+        height: 140px;
+        border: 3px solid rgba(0, 74, 173, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .side-loader-orbit {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: rotate-orbit 2.5s linear infinite;
+    }
+
+    .side-loader-dot {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .side-loader-dot-1 {
+        background: #004aad;
+    }
+
+    .side-loader-dot-2 {
+        background: #22b7cb;
+        transform: translateX(-50%) rotate(120deg) translate(0, -70px) rotate(-120deg);
+    }
+
+    .side-loader-dot-3 {
+        background: #d21c31;
+        transform: translateX(-50%) rotate(240deg) translate(0, -70px) rotate(-240deg);
+    }
+
+    @keyframes rotate-orbit {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse-center {
+        0%, 100% { 
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 0 35px rgba(0, 74, 173, 0.5);
+        }
+        50% { 
+            transform: translate(-50%, -50%) scale(1.15);
+            box-shadow: 0 0 45px rgba(0, 74, 173, 0.7);
+        }
+    }
+
+    /* Side Content Text */
+    .side-text {
+        text-align: center;
+        padding: 0 15px;
+    }
+
+    .side-text h3 {
+        font-size: 22px;
+        font-weight: 700;
+        color: #004aad;
+        margin-bottom: 12px;
+        line-height: 1.3;
+    }
+
+    .side-text p {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Side Features */
+    .side-features {
+        margin-top: 35px;
+        width: 100%;
+    }
+
+    .side-feature-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+        font-size: 14px;
+        color: #333;
+        font-weight: 500;
+    }
+
+    .side-feature-item svg {
+        flex-shrink: 0;
+        width: 22px;
+        height: 22px;
     }
 
     /* Progress Bar */
@@ -1239,6 +1609,7 @@
         font-size: 15px;
         transition: all 0.3s;
         font-family: inherit;
+        box-sizing: border-box;
     }
 
     .form-group input:focus,
@@ -1266,13 +1637,13 @@
         border: none;
         cursor: pointer;
         transition: all 0.3s;
+        width: 100%;
     }
 
     .btn-next,
     .btn-submit {
         background: linear-gradient(135deg, #fc0511, #a30008);
         color: #fff;
-        width: 100%;
     }
 
     .btn-next:hover,
@@ -1297,26 +1668,323 @@
         margin-top: 20px;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
+    /* Validation States */
+    .form-group input.valid,
+    .form-group select.valid,
+    .form-group textarea.valid {
+        border-color: #28a745 !important;
+    }
+
+    .form-group input.invalid,
+    .form-group select.invalid,
+    .form-group textarea.invalid {
+        border-color: #ff4444 !important;
+    }
+
+    @keyframes scaleIn {
+        0% {
+            transform: scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Custom Scrollbar */
+    .modal-form-side::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .modal-form-side::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .modal-form-side::-webkit-scrollbar-thumb {
+        background: #fc0511;
+        border-radius: 10px;
+    }
+
+    .modal-form-side::-webkit-scrollbar-thumb:hover {
+        background: #a30008;
+    }
+
+    /* ============================================
+       RESPONSIVE DESIGN - MOBILE FIXES
+    ============================================ */
+
+    /* Tablet View */
+    @media (max-width: 968px) {
         .modal-content {
-            padding: 30px 20px;
+            grid-template-columns: 1fr;
+            max-width: 600px;
+            max-height: 85vh;
+        }
+
+        .modal-animation-side {
+            border-radius: 20px 20px 0 0;
+            padding: 25px 20px;
+        }
+
+        .modal-form-side {
+            padding: 30px 25px;
+        }
+
+        .side-loader {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+        }
+
+        .side-loader-center {
+            width: 35px;
+            height: 35px;
+        }
+
+        .side-loader-orbit-ring {
+            width: 100px;
+            height: 100px;
+        }
+
+        .side-loader-dot {
+            width: 16px;
+            height: 16px;
+            top: 10px;
+        }
+
+        .side-loader-dot-2 {
+            transform: translateX(-50%) rotate(120deg) translate(0, -50px) rotate(-120deg);
+        }
+
+        .side-loader-dot-3 {
+            transform: translateX(-50%) rotate(240deg) translate(0, -50px) rotate(-240deg);
+        }
+
+        .side-text h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .side-text p {
+            font-size: 13px;
+        }
+
+        .side-features {
+            margin-top: 20px;
+        }
+
+        .side-feature-item {
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .side-feature-item svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    /* Mobile View - Critical Fixes */
+    @media (max-width: 768px) {
+        .modal-overlay {
+            padding: 10px;
+            align-items: flex-start;
+        }
+
+        .modal-content {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 15px;
             max-height: 95vh;
+            width: 100%;
+        }
+
+        .modal-close {
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            font-size: 24px;
+        }
+
+        .modal-animation-side {
+            padding: 20px 15px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-form-side {
+            padding: 25px 20px;
+            max-height: 60vh;
         }
 
         .form-step-title {
             font-size: 20px;
         }
 
+        .form-step-subtitle {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 11px 14px;
+            font-size: 14px;
+        }
+
         .form-row {
             grid-template-columns: 1fr;
+            gap: 18px;
         }
 
         .form-buttons {
             grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .btn-next,
+        .btn-prev,
+        .btn-submit {
+            padding: 13px 25px;
+            font-size: 14px;
+        }
+
+        .progress-container {
+            margin-bottom: 20px;
+        }
+    }
+
+    /* Extra Small Mobile Devices */
+    @media (max-width: 480px) {
+        .modal-overlay {
+            padding: 5px;
+        }
+
+        .modal-content {
+            border-radius: 12px;
+            margin-top: 5px;
+        }
+
+        .modal-animation-side {
+            padding: 18px 12px;
+        }
+
+        .side-loader {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+        }
+
+        .side-loader-center {
+            width: 30px;
+            height: 30px;
+        }
+
+        .side-loader-orbit-ring {
+            width: 85px;
+            height: 85px;
+            border-width: 2px;
+        }
+
+        .side-loader-dot {
+            width: 14px;
+            height: 14px;
+            top: 8px;
+        }
+
+        .side-loader-dot-2 {
+            transform: translateX(-50%) rotate(120deg) translate(0, -42px) rotate(-120deg);
+        }
+
+        .side-loader-dot-3 {
+            transform: translateX(-50%) rotate(240deg) translate(0, -42px) rotate(-240deg);
+        }
+
+        .side-text h3 {
+            font-size: 16px;
+        }
+
+        .side-text p {
+            font-size: 12px;
+        }
+
+        .side-feature-item {
+            font-size: 11px;
+            gap: 8px;
+        }
+
+        .modal-form-side {
+            padding: 20px 15px;
+        }
+
+        .form-step-title {
+            font-size: 18px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 10px 12px;
+            font-size: 13px;
+        }
+
+        .btn-next,
+        .btn-prev,
+        .btn-submit {
+            padding: 12px 20px;
+            font-size: 13px;
+        }
+    }
+
+    /* Landscape Mobile Fix */
+    @media (max-width: 768px) and (orientation: landscape) {
+        .modal-overlay {
+            align-items: flex-start;
+        }
+
+        .modal-content {
+            max-height: 98vh;
+        }
+
+        .modal-animation-side {
+            padding: 15px;
+        }
+
+        .side-loader {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .side-text {
+            display: none;
+        }
+
+        .side-features {
+            margin-top: 10px;
+        }
+
+        .modal-form-side {
+            max-height: 70vh;
         }
     }
 </style>
+
 
 <script>
     let currentStep = 1;
@@ -1351,17 +2019,60 @@
     }
 
     function validateCurrentStep() {
-        const requiredInputs = document.querySelectorAll(`[data-step="${currentStep}"] [required]`);
-        for (let input of requiredInputs) {
-            if (!input.value.trim()) {
-                alert('Please fill all required fields before continuing');
-                input.focus();
+        const currentStepElement = document.querySelector(`[data-step="${currentStep}"]`);
+        const requiredInputs = currentStepElement.querySelectorAll('[required]');
+        
+        let isValid = true;
+        let firstInvalidField = null;
+        
+        requiredInputs.forEach(input => {
+            // Reset border color
+            input.style.borderColor = '#e9ecef';
+            
+            // Check if field is empty or invalid
+            const value = input.value.trim();
+            
+            if (!value) {
+                isValid = false;
                 input.style.borderColor = '#ff4444';
-                setTimeout(() => input.style.borderColor = '#fc0511', 2000);
-                return false;
+                if (!firstInvalidField) {
+                    firstInvalidField = input;
+                }
+            } else if (input.type === 'email' && !isValidEmail(value)) {
+                isValid = false;
+                input.style.borderColor = '#ff4444';
+                if (!firstInvalidField) {
+                    firstInvalidField = input;
+                }
+            } else if (input.type === 'tel' && value.length < 10) {
+                isValid = false;
+                input.style.borderColor = '#ff4444';
+                if (!firstInvalidField) {
+                    firstInvalidField = input;
+                }
             }
+        });
+        
+        if (!isValid) {
+            alert('Please fill all required fields correctly before continuing');
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+                // Reset border after 3 seconds
+                setTimeout(() => {
+                    requiredInputs.forEach(input => {
+                        input.style.borderColor = '#e9ecef';
+                    });
+                }, 3000);
+            }
+            return false;
         }
+        
         return true;
+    }
+
+    function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
     }
 
     function updateProgressBar() {
@@ -1393,17 +2104,16 @@
             });
         }
 
-        // Modal triggers - Select ALL buttons that should open modal
+        // Modal triggers
         const allModalTriggers = document.querySelectorAll('.modal-trigger-btn, .service-trigger-modal, .service-pastel-btn');
         
         console.log('Found ' + allModalTriggers.length + ' modal triggers');
         
-        // Add click event to each trigger
         allModalTriggers.forEach((button, index) => {
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('Trigger ' + index + ' clicked');
+                console.log('Opening modal from trigger ' + index);
                 openModal();
             });
         });
@@ -1425,21 +2135,54 @@
             }
         });
 
+        // Add real-time validation feedback
+        const allInputs = document.querySelectorAll('#studyAbroadForm input, #studyAbroadForm select, #studyAbroadForm textarea');
+        allInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.hasAttribute('required')) {
+                    if (this.value.trim()) {
+                        this.style.borderColor = '#28a745';
+                    } else {
+                        this.style.borderColor = '#e9ecef';
+                    }
+                }
+            });
+            
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#ff4444';
+                } else if (this.value.trim()) {
+                    this.style.borderColor = '#28a745';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                if (this.style.borderColor === 'rgb(255, 68, 68)') {
+                    this.style.borderColor = '#fc0511';
+                }
+            });
+        });
+
         // Form submission
         const form = document.getElementById('studyAbroadForm');
         if (form) {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                console.log('Form submit triggered');
+                
                 if (!validateCurrentStep()) {
+                    console.log('Validation failed');
                     return;
                 }
+
+                console.log('Validation passed, submitting...');
 
                 const formData = new FormData(this);
                 const submitBtn = this.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
                 
-                submitBtn.innerHTML = '⏳ Submitting...';
+                submitBtn.innerHTML = '<span style="display:inline-flex;align-items:center;gap:8px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="animation: rotate-orbit 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="3" stroke-dasharray="60" stroke-dashoffset="15" stroke-linecap="round"/></svg> Submitting...</span>';
                 submitBtn.disabled = true;
 
                 fetch('https://formsubmit.co/ajax/meritminds.info@gmail.com', {
@@ -1448,24 +2191,24 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('Form submitted:', data);
+                    console.log('Form submitted successfully:', data);
                     
                     // Show success message
                     document.querySelector('.modal-content').innerHTML = `
-                        <div style="text-align:center; padding:60px 20px;">
-                            <div style="width:80px; height:80px; background:linear-gradient(135deg,#28a745,#20c997); border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center;">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div style="text-align:center; padding:60px 40px; grid-column: 1 / -1;">
+                            <div style="width:90px; height:90px; background:linear-gradient(135deg,#28a745,#20c997); border-radius:50%; margin:0 auto 25px; display:flex; align-items:center; justify-content:center; animation: scaleIn 0.5s ease;">
+                                <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M20 6L9 17L4 12" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </div>
-                            <h2 style="color:#28a745; margin-bottom:15px; font-size:28px;">Thank You!</h2>
-                            <p style="color:#666; font-size:16px; line-height:1.6; margin-bottom:10px;">
+                            <h2 style="color:#28a745; margin-bottom:15px; font-size:32px; font-weight:700;">Thank You!</h2>
+                            <p style="color:#666; font-size:17px; line-height:1.6; margin-bottom:10px; max-width:500px; margin-left:auto; margin-right:auto;">
                                 Your application has been received successfully.
                             </p>
-                            <p style="color:#999; font-size:14px; margin-bottom:30px;">
+                            <p style="color:#999; font-size:15px; margin-bottom:35px;">
                                 Our counselor will contact you within 24 hours via WhatsApp/Email.
                             </p>
-                            <button onclick="location.reload()" style="background:linear-gradient(135deg,#fc0511,#a30008); color:#fff; border:none; padding:14px 30px; border-radius:10px; font-weight:700; font-size:16px; cursor:pointer;">
+                            <button onclick="location.reload()" style="background:linear-gradient(135deg,#fc0511,#a30008); color:#fff; border:none; padding:16px 40px; border-radius:10px; font-weight:700; font-size:16px; cursor:pointer; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 25px rgba(252,5,17,0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
                                 Close & Return
                             </button>
                         </div>
@@ -1473,7 +2216,10 @@
                 })
                 .catch(error => {
                     console.error('Submission error:', error);
-                    alert('Submission failed. Please try again.');
+                    
+                    // Show error message
+                    alert('⚠️ Submission failed. Please try again or contact us directly.');
+                    
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
                 });
@@ -1481,5 +2227,7 @@
         }
     });
 </script>
+
+
 
 <?php include 'footer.php'?>
