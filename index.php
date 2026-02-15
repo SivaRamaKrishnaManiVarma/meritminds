@@ -1,6 +1,5 @@
 <?php include 'header.php'?>
 
-<!-- Hero Section with Orbit Animation - FIXED ORBITS -->
 <!-- Updated HTML with Rotating Flags (except India) -->
 <section class="orbit-animation-section mt-0">
     <div class="container">
@@ -127,19 +126,19 @@
 
                     <!-- Center person (Full image - Fixed) -->
                     <div class="center-person">
-                        <img src="assets/imgs/picture3.jpg" alt="Student">
+                        <img src="assets/imgs/new_logo.png" alt="Student">
                     </div>
 
                     <!-- Top-left card (Fixed) -->
                     <div class="alumni-card">
                         <img src="assets/imgs/picture6.jpg" alt="Alumni" class="card-avatar">
-                        <p class="card-text">Clarke is an alumni from Oxford University</p>
+                        <p class="card-text">Thanisq is a student from University of Minnesota</p>
                     </div>
 
                     <!-- Bottom card (Fixed) -->
-                    <div class="bottom-card">
+                    <!-- <div class="bottom-card">
                         <p class="card-text-bottom">Arnav looking forward to join Oxford University</p>
-                    </div>
+                    </div> -->
 
                     <!-- India flag - FIXED (NO ROTATION) -->
                     <div class="flag-item india-flag">
@@ -191,7 +190,7 @@
             <!-- <h2>Merit<span> Minds</span></h2>
             <p>one stop solution for all your study abroad needs</p> -->
              <h2 class="services-main-title" style="font-size:36px; font-weight:700; color:#004aad;">
-                Merit<span style="color:#d21c31;">Minds</span>
+                Master<span style="color:#d21c31;">X</span>
             </h2>
         </div>
         
@@ -223,7 +222,7 @@
                             <circle cx="65" cy="50" r="3" fill="#0D47A1"/>
                         </svg>
                     </div>
-                    <h5>international</h5>
+                    <h5>International</h5>
                     <h5>money transfer</h5>
                 </div>
 
@@ -240,7 +239,7 @@
                             <line x1="50" y1="66" x2="65" y2="66" stroke="#B71C1C" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <h5>credit card</h5>
+                    <h5>Credit card</h5>
                 </div>
                 <!-- 5. International Bank Account - Teal -->
                 <div class="service-slide-card teal-card">
@@ -258,7 +257,7 @@
                             <text x="50" y="33" font-size="5" fill="#FFF" text-anchor="middle" font-weight="bold">$</text>
                         </svg>
                     </div>
-                    <h5>international</h5>
+                    <h5>International</h5>
                     <h5>bank account</h5>
                 </div>
                 <!-- 3. International SIM Card - Blue -->
@@ -273,7 +272,7 @@
                             <path d="M40 45 L45 45 L45 55 L40 55 M55 45 L60 45 L60 55 L55 55 M45 45 L55 45 M45 50 L55 50 M45 55 L55 55" stroke="#0D47A1" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h5>international</h5>
+                    <h5>International</h5>
                     <h5>sim card</h5>
                 </div>
 
@@ -291,7 +290,7 @@
                             <circle cx="52" cy="70" r="1.5" fill="#FFF"/>
                         </svg>
                     </div>
-                    <h5>housing</h5>
+                    <h5>Housing</h5>
                 </div>
 
                 
@@ -310,7 +309,7 @@
                             <circle cx="65" cy="50" r="3" fill="#0D47A1"/>
                         </svg>
                     </div>
-                    <h5>international</h5>
+                    <h5>International</h5>
                     <h5>money transfer</h5>
                 </div>
 
@@ -326,7 +325,7 @@
                             <line x1="50" y1="66" x2="65" y2="66" stroke="#B71C1C" stroke-width="2" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <h5>credit card</h5>
+                    <h5>Credit card</h5>
                 </div>
 
                 <!-- 3. International SIM Card - Blue (Duplicate) -->
@@ -340,7 +339,7 @@
                             <path d="M40 45 L45 45 L45 55 L40 55 M55 45 L60 45 L60 55 L55 55 M45 45 L55 45 M45 50 L55 50 M45 55 L55 55" stroke="#0D47A1" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h5>international</h5>
+                    <h5>International</h5>
                     <h5>sim card</h5>
                 </div>
 
@@ -357,7 +356,7 @@
                             <circle cx="52" cy="70" r="1.5" fill="#FFF"/>
                         </svg>
                     </div>
-                    <h5>housing</h5>
+                    <h5>Housing</h5>
                 </div>
 
                 <!-- 5. International Bank Account - Teal (Duplicate) -->
@@ -375,7 +374,7 @@
                             <text x="50" y="33" font-size="5" fill="#FFF" text-anchor="middle" font-weight="bold">$</text>
                         </svg>
                     </div>
-                    <h5>international</h5>
+                    <h5>International</h5>
                     <h5>bank account</h5>
                 </div>
 
@@ -392,7 +391,7 @@
         <!-- <h2 class="section-title text-center mb-2" style="font-size:32px; font-weight:700; color:#2d3748;">
             Hear from our students
         </h2> -->
-        <h2 class="services-main-title" style="font-size:36px; font-weight:700; color:#004aad;">
+        <h2 class="services-main-title" style="font-size:36px; font-weight:700; color:#004aad; text-align:center;">
                 Hear from our <span style="color:#d21c31;">students</span>
             </h2>
         
@@ -407,10 +406,108 @@
 
             <!-- Testimonial Cards Container -->
             <div class="testimonial-carousel" id="testimonialCarousel">
-                <!-- Card 1: Tanishq Kondru -->
+<div class="video-testimonial-card">
+    <div class="student-photo-wrapper">
+
+        <!-- Image -->
+        <img src="assets/imgs/students/samatha.jpeg"
+             alt="Samatha Reddy"
+             class="student-photo">
+
+        <!-- Video -->
+        <video class="student-video"
+               src="assets/imgs/students/vid_samatha.mp4"
+               playsinline
+               preload="metadata">
+        </video>
+
+        <!-- Play Icon -->
+        <div class="play-overlay">▶</div>
+
+        <!-- Testimonial Content -->
+        <div class="testimonial-floating-box">
+            <div class="testimonial-header mb-2">
+                <h6 class="testimonial-title"
+                    style="color:#7d6ef3; font-weight:700; font-size:13px; margin-bottom:4px;">
+                    EXCELLENT EXPERIENCE
+                </h6>
+                <div class="testimonial-rating"
+                     style="color:#ffc107; font-size:14px;">
+                    ★★★★★
+                </div>
+            </div>
+
+            <p class="testimonial-quote">
+                "I had an excellent experience, Rahul Sir on my side, everything including my VISA process went smoothly."
+            </p>
+
+            <div class="testimonial-author-info">
+                <div>
+                    <h6 class="author-name">Samatha Reddy</h6>
+                    <p class="author-university" style="color:#7d6ef3;">
+                        University of Stirling
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+let userInteracted = false;
+
+document.querySelectorAll('.video-testimonial-card').forEach(card => {
+    const video = card.querySelector('.student-video');
+    const playOverlay = card.querySelector('.play-overlay');
+
+    // CLICK → unlock audio + play immediately
+    card.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent double triggers
+
+        userInteracted = true;
+
+        video.muted = false;
+        video.currentTime = 0;
+        video.play();
+
+        card.classList.add('video-playing');
+    });
+
+    // HOVER → play with sound (only after interaction)
+    card.addEventListener('mouseenter', () => {
+        if (!userInteracted) return;
+
+        video.muted = false;
+        video.currentTime = 0;
+        video.play();
+
+        card.classList.add('video-playing');
+    });
+
+    // LEAVE → stop and reset
+    card.addEventListener('mouseleave', () => {
+        video.pause();
+        video.currentTime = 0;
+        card.classList.remove('video-playing');
+    });
+
+    // SAFETY CLEANUP
+    video.addEventListener('pause', () => {
+        card.classList.remove('video-playing');
+    });
+
+    video.addEventListener('ended', () => {
+        card.classList.remove('video-playing');
+    });
+});
+</script>
+
+
+            
+                    <!-- Card 1: Tanishq Kondru -->
                 <div class="video-testimonial-card">
                     <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture3.jpg" alt="Tanishq Kondru" class="student-photo">
+                        <img src="assets/imgs/picture6.jpg" alt="Tanishq Kondru" class="student-photo">
                         
                         <!-- Floating Content Box -->
                         <div class="testimonial-floating-box">
@@ -432,7 +529,7 @@
                 <!-- Card 2: Salma Sultana -->
                 <div class="video-testimonial-card">
                     <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture6.jpg" alt="Salma Sultana" class="student-photo">
+                        <img src="assets/imgs/picture3.jpg" alt="Salma Sultana" class="student-photo">
                         
                         <div class="testimonial-floating-box">
                             <div class="testimonial-header mb-2">
@@ -453,7 +550,7 @@
                 <!-- Card 3: Gopalakrishna Reddy -->
                 <div class="video-testimonial-card">
                     <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture3.jpg" alt="Gopalakrishna Reddy Manukonda" class="student-photo">
+                        <img src="assets/imgs/picture4.jpg" alt="Gopalakrishna Reddy Manukonda" class="student-photo">
                         
                         <div class="testimonial-floating-box">
                             <div class="testimonial-header mb-2">
@@ -474,7 +571,7 @@
                 <!-- Card 4: Lakshma Reddy -->
                 <div class="video-testimonial-card">
                     <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture3.jpg" alt="Lakshma Reddy Pothireddy" class="student-photo">
+                        <img src="assets/imgs/picture5.jpg" alt="Lakshma Reddy Pothireddy" class="student-photo">
                         
                         <div class="testimonial-floating-box">
                             <div class="testimonial-header mb-2">
@@ -492,31 +589,12 @@
                     </div>
                 </div>
 
-                <!-- Card 5: Ishitha Bussa -->
-                <div class="video-testimonial-card">
-                    <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture3.jpg" alt="Ishitha Bussa" class="student-photo">
-                        
-                        <div class="testimonial-floating-box">
-                            <div class="testimonial-header mb-2">
-                                <h6 class="testimonial-title" style="color:#7d6ef3; font-weight:700; font-size:13px; margin-bottom:4px;">EXCELLENT EXPERIENCE</h6>
-                                <div class="testimonial-rating" style="color:#ffc107; font-size:14px;">★★★★★</div>
-                            </div>
-                            <p class="testimonial-quote">"I had an excellent experience, Rahul Sir on my side, everything including my VISA process went smoothly."</p>
-                            <div class="testimonial-author-info">
-                                <div>
-                                    <h6 class="author-name">Ishitha Bussa</h6>
-                                    <p class="author-university" style="color:#7d6ef3;">UMass Boston University</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <!-- Card 6: Venkata Saikumar -->
                 <div class="video-testimonial-card">
                     <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture3.jpg" alt="Venkata Saikumar Marri" class="student-photo">
+                        <img src="assets/imgs/picture8.jpeg" alt="Venkata Saikumar Marri" class="student-photo">
                         
                         <div class="testimonial-floating-box">
                             <div class="testimonial-header mb-2">
@@ -794,9 +872,9 @@
                     <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">in Data Science</p>
 
                     <!-- Illustration -->
-                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                    <!-- <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
                         <img src="assets/imgs/blog-data-science.png" alt="Data Science" style="max-width: 250px; height: auto;">
-                    </div>
+                    </div> -->
 
                     <!-- Arrow Icon -->
                     <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
@@ -816,9 +894,9 @@
                     <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">Australia</p>
 
                     <!-- Illustration -->
-                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                    <!-- <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
                         <img src="assets/imgs/blog-english.png" alt="PTE Australia" style="max-width: 250px; height: auto;">
-                    </div>
+                    </div> -->
 
                     <!-- Arrow Icon -->
                     <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
@@ -838,9 +916,9 @@
                     <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">template</p>
 
                     <!-- Illustration -->
-                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                    <!-- <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
                         <img src="assets/imgs/blog-mba.png" alt="MBA Career" style="max-width: 200px; height: auto;">
-                    </div>
+                    </div> -->
 
                     <!-- Arrow Icon -->
                     <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">
@@ -860,9 +938,9 @@
                     <p style="font-size: 16px; color: #22b7cb; font-weight: 500; margin-bottom: 20px;">after 12th</p>
 
                     <!-- Illustration -->
-                    <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
+                    <!-- <div class="blog-illustration" style="text-align: right; margin-top: 30px;">
                         <img src="assets/imgs/blog-canada.png" alt="Canada Courses" style="max-width: 250px; height: auto;">
-                    </div>
+                    </div> -->
 
                     <!-- Arrow Icon -->
                     <div class="blog-arrow" style="position: absolute; bottom: 30px; right: 30px; width: 40px; height: 40px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 74, 173, 0.15);">

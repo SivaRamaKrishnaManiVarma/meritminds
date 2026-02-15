@@ -1041,6 +1041,59 @@
     flex-shrink: 0;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.student-photo-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.student-photo,
+.student-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Hide video initially */
+.student-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+/* Hover: preview video (silent) */
+.video-testimonial-card:hover .student-photo {
+    opacity: 0;
+}
+
+.video-testimonial-card:hover .student-video {
+    opacity: 1;
+}
+
+.play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: white;
+    background: rgba(0,0,0,0.25);
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* Hide play icon when video is playing */
+.video-playing .play-overlay {
+    opacity: 0;
+}
+
+
+.video-testimonial-card:hover .play-overlay {
+    opacity: 0.6;
+}
 
 .video-testimonial-card:hover {
     transform: translateY(-6px);
@@ -3011,7 +3064,7 @@ section {
     font-size: 18px;
     margin: 4px 0;
     text-align: center;
-    text-transform: lowercase;
+    /* text-transform: lowercase; */
     line-height: 1.3;
     transition: transform 0.3s ease;
 }

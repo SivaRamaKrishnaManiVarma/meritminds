@@ -1,0 +1,1108 @@
+
+<?php
+session_start();
+if (!isset($_SESSION['admin_id'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Super Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-warning {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .stats-container {
+            max-width: 1400px;
+            margin: 30px auto 0;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        
+        .stat-info h3 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .stat-info p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .actions-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .search-filter {
+            display: flex;
+            gap: 10px;
+            flex: 1;
+        }
+        
+        .search-filter input,
+        .search-filter select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .search-filter input {
+            flex: 1;
+            max-width: 300px;
+        }
+        
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        thead {
+            background: #f8f9fa;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        tbody tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-disabled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 20px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            color: #333;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group small {
+            display: block;
+            margin-top: 5px;
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .alert {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .alert-error {
+            background: #fee;
+            color: #c33;
+            border: 1px solid #fcc;
+        }
+        
+        .alert-success {
+            background: #efe;
+            color: #3c3;
+            border: 1px solid #cfc;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        details {
+            margin-top: 15px;
+        }
+
+        summary {
+            cursor: pointer;
+            color: #667eea;
+            font-weight: 500;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        summary:hover {
+            background: #e9ecef;
+        }
+    </style>
+</head>
+<body>
+ <div class="header">
+    <h1>🔐 Super Admin Dashboard - OTP Based</h1>
+    <div class="header-right">
+        <button class="btn btn-secondary" onclick="window.location.href='categories.php'">📦 Manage Categories</button>
+        <button class="btn btn-secondary" onclick="window.location.href='units.php'">📏 Manage Units</button>
+        <button class="btn btn-secondary" onclick="window.location.href='products.php'">🛍️ Manage Products</button>
+        <span>Welcome, <?php echo htmlspecialchars($_SESSION['admin_username']); ?></span>
+        <button class="btn btn-info" onclick="openProfileModal()">My Profile</button>
+        <button class="btn btn-primary" onclick="logout()">Logout</button>
+    </div>
+</div>
+
+<!-- Statistics Cards -->
+<div class="stats-container">
+    <div class="stat-card">
+        <div class="stat-icon" style="background: #28a745;">📊</div>
+        <div class="stat-info">
+            <h3 id="totalAdmins">0</h3>
+            <p>Total Area Admins</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon" style="background: #17a2b8;">✓</div>
+        <div class="stat-info">
+            <h3 id="activeAdmins">0</h3>
+            <p>Active Admins</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon" style="background: #dc3545;">✗</div>
+        <div class="stat-info">
+            <h3 id="disabledAdmins">0</h3>
+            <p>Disabled Admins</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon" style="background: #ffc107;">📅</div>
+        <div class="stat-info">
+            <h3 id="recentAdmins">0</h3>
+            <p>Added This Month</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="actions-bar">
+        <div class="search-filter">
+            <input type="text" id="searchInput" placeholder="Search by username, mobile, or area...">
+            <select id="statusFilter">
+                <option value="all">All Status</option>
+                <option value="active">Active Only</option>
+                <option value="disabled">Disabled Only</option>
+            </select>
+        </div>
+        <button class="btn btn-success" onclick="openCreateModal()">+ Add Area Admin</button>
+    </div>
+    
+    <!-- UPDATED: Table - Removed Email Column, Added Last Login -->
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Mobile Number</th>
+                    <th>Area Name</th>
+                    <th>Status</th>
+                    <th>Last Login</th>
+                    <th>Created At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <tr>
+                    <td colspan="8" class="no-data">Loading...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- UPDATED: Area Admin Create/Edit Modal (OTP-Based, No Password/Email) -->
+<div class="modal" id="adminModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">Add Area Admin</h2>
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+        </div>
+        
+        <!-- Info Box explaining OTP authentication -->
+        <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+            <h4 style="color: #1976d2; margin-bottom: 8px; font-size: 14px;">🔐 OTP-Based Authentication</h4>
+            <p style="color: #555; font-size: 13px; line-height: 1.6; margin: 0;">
+                • Area Admins login using <strong>OTP only</strong><br>
+                • OTP sent to their mobile number<br>
+                • No password required - secure & convenient
+            </p>
+        </div>
+        
+        <div id="modalAlert" class="alert"></div>
+        
+        <form id="adminForm">
+            <input type="hidden" id="area_admin_id">
+            
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <input type="text" id="username" required placeholder="Enter username">
+                <small>Display name for admin panel</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="mobile_number">Mobile Number * (Login Credential)</label>
+                <input 
+                    type="tel" 
+                    id="mobile_number" 
+                    pattern="[0-9]{10}" 
+                    maxlength="10"
+                    required 
+                    placeholder="10-digit mobile number"
+                >
+                <small>⚠️ Area Admin will receive OTP on this number to login</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="area_name">Area Name</label>
+                <input type="text" id="area_name" placeholder="e.g., Guntur, Vijayawada">
+                <small>Geographical area this admin manages</small>
+            </div>
+            
+            <button type="submit" class="btn btn-success" id="submitBtn">Create Area Admin</button>
+        </form>
+    </div>
+</div>
+
+<!-- Super Admin Profile Modal (Keep as is - Super Admin still uses password) -->
+<div class="modal" id="profileModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>My Profile Settings</h2>
+            <button class="close-modal" onclick="closeProfileModal()">&times;</button>
+        </div>
+        
+        <div id="profileAlert" class="alert"></div>
+        
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="profile_username">Username *</label>
+                <input type="text" id="profile_username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="profile_email">Email</label>
+                <input type="email" id="profile_email">
+            </div>
+            
+            <div class="divider"></div>
+            
+            <h3 style="margin-bottom: 15px; color: #333; font-size: 16px;">Change Password (Optional)</h3>
+            
+            <div class="form-group">
+                <label for="current_password">Current Password</label>
+                <input type="password" id="current_password">
+                <small>Required only if you want to change your password</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="new_password">New Password</label>
+                <input type="password" id="new_password">
+                <small>Leave blank to keep current password</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirm New Password</label>
+                <input type="password" id="confirm_password">
+            </div>
+            
+            <button type="submit" class="btn btn-success" id="profileSubmitBtn">Update Profile</button>
+        </form>
+    </div>
+</div>
+
+<!-- Pincode Management Modal (No changes) -->
+<div class="modal" id="pincodeModal">
+    <div class="modal-content" style="max-width: 700px;">
+        <div class="modal-header">
+            <h2>Manage Pincodes - <span id="pincodeAdminName"></span></h2>
+            <button class="close-modal" onclick="closePincodeModal()">&times;</button>
+        </div>
+        
+        <div id="pincodeAlert" class="alert"></div>
+        
+        <!-- Add Pincode Form -->
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h3 style="margin-bottom: 15px; font-size: 16px;">Add Pincodes</h3>
+            <form id="pincodeForm" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <input type="hidden" id="pincode_area_admin_id">
+                <input 
+                    type="text" 
+                    id="new_pincode" 
+                    placeholder="Enter 6-digit pincode" 
+                    pattern="[0-9]{6}" 
+                    maxlength="6"
+                    style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"
+                >
+                <button type="submit" class="btn btn-success">Add Pincode</button>
+            </form>
+            
+            <!-- Bulk Add -->
+            <details style="margin-top: 15px;">
+                <summary>Add Multiple Pincodes</summary>
+                <div style="margin-top: 10px;">
+                    <textarea 
+                        id="bulk_pincodes" 
+                        placeholder="Enter pincodes separated by comma or new line&#10;Example: 522001, 522002, 522003"
+                        rows="4"
+                        style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; resize: vertical;"
+                    ></textarea>
+                    <button onclick="addBulkPincodes()" class="btn btn-success" style="margin-top: 10px;">Add All</button>
+                </div>
+            </details>
+        </div>
+        
+        <!-- Assigned Pincodes List -->
+        <div>
+            <h3 style="margin-bottom: 15px; font-size: 16px;">Assigned Pincodes (<span id="pincodeCount">0</span>)</h3>
+            <div id="pincodesList" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 5px;">
+                <div style="padding: 20px; text-align: center; color: #999;">Loading...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let isEditMode = false;
+    let currentPincodeAdminId = 0;
+    
+    // Update statistics
+    function updateStats(admins) {
+        const total = admins.length;
+        const active = admins.filter(a => a.is_active == 1).length;
+        const disabled = admins.filter(a => a.is_active == 0).length;
+        
+        // Calculate admins added this month
+        const now = new Date();
+        const thisMonth = admins.filter(a => {
+            const created = new Date(a.created_at);
+            return created.getMonth() === now.getMonth() && 
+                   created.getFullYear() === now.getFullYear();
+        }).length;
+        
+        document.getElementById('totalAdmins').textContent = total;
+        document.getElementById('activeAdmins').textContent = active;
+        document.getElementById('disabledAdmins').textContent = disabled;
+        document.getElementById('recentAdmins').textContent = thisMonth;
+    }
+    
+    // Load area admins
+    async function loadAreaAdmins() {
+        const search = document.getElementById('searchInput').value;
+        const status = document.getElementById('statusFilter').value;
+        
+        try {
+            const response = await fetch('api/area_admin_crud_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'list',
+                    search: search,
+                    status: status
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                displayAreaAdmins(result.data);
+                updateStats(result.data);
+            } else {
+                document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" class="no-data">Failed to load data</td></tr>';
+            }
+        } catch (error) {
+            document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" class="no-data">Error loading data</td></tr>';
+        }
+    }
+    
+    // UPDATED: Display admins (removed email, added last_login)
+    function displayAreaAdmins(admins) {
+        const tbody = document.getElementById('tableBody');
+        
+        if (admins.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="8" class="no-data">No area admins found</td></tr>';
+            return;
+        }
+        
+        tbody.innerHTML = admins.map(admin => `
+            <tr>
+                <td>${admin.area_admin_id}</td>
+                <td>${admin.username}</td>
+                <td>
+                    <strong>${admin.mobile_number}</strong>
+                    <br><small style="color: #666;">🔐 OTP Login</small>
+                </td>
+                <td>${admin.area_name || '-'}</td>
+                <td>
+                    <span class="status-badge status-${admin.is_active == 1 ? 'active' : 'disabled'}">
+                        ${admin.is_active == 1 ? 'Active' : 'Disabled'}
+                    </span>
+                </td>
+                <td>${admin.last_login ? new Date(admin.last_login).toLocaleString('en-IN', { 
+                    dateStyle: 'short', 
+                    timeStyle: 'short' 
+                }) : 'Never'}</td>
+                <td>${new Date(admin.created_at).toLocaleDateString('en-IN')}</td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-info btn-small" onclick="managePincodes(${admin.area_admin_id}, '${admin.username.replace(/'/g, "\\'")}')">Pincodes</button>
+                        <button class="btn btn-warning btn-small" onclick="editAdmin(${admin.area_admin_id})">Edit</button>
+                        <button class="btn ${admin.is_active == 1 ? 'btn-danger' : 'btn-success'} btn-small" 
+                            onclick="toggleStatus(${admin.area_admin_id})">
+                            ${admin.is_active == 1 ? 'Disable' : 'Enable'}
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    // UPDATED: Open create modal (OTP-based, no password)
+    function openCreateModal() {
+        isEditMode = false;
+        document.getElementById('modalTitle').textContent = 'Add Area Admin (OTP-Based)';
+        document.getElementById('submitBtn').textContent = 'Create Area Admin';
+        document.getElementById('adminForm').reset();
+        document.getElementById('adminModal').classList.add('active');
+    }
+    
+    // UPDATED: Edit admin (no password/email fields)
+    async function editAdmin(id) {
+        isEditMode = true;
+        document.getElementById('modalTitle').textContent = 'Edit Area Admin';
+        document.getElementById('submitBtn').textContent = 'Update Area Admin';
+        
+        try {
+            const response = await fetch('api/area_admin_crud_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'get', area_admin_id: id })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                const admin = result.data;
+                document.getElementById('area_admin_id').value = admin.area_admin_id;
+                document.getElementById('username').value = admin.username;
+                document.getElementById('mobile_number').value = admin.mobile_number;
+                document.getElementById('area_name').value = admin.area_name || '';
+                
+                document.getElementById('adminModal').classList.add('active');
+            }
+        } catch (error) {
+            alert('Error loading admin data');
+        }
+    }
+    
+    function closeModal() {
+        document.getElementById('adminModal').classList.remove('active');
+        document.getElementById('adminForm').reset();
+    }
+    
+    async function toggleStatus(id) {
+        if (!confirm('Are you sure you want to toggle the status of this area admin?')) {
+            return;
+        }
+        
+        try {
+            const response = await fetch('api/area_admin_crud_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'toggle_status',
+                    area_admin_id: id
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                loadAreaAdmins();
+            } else {
+                alert(result.message || 'Failed to update status');
+            }
+        } catch (error) {
+            alert('Error updating status');
+        }
+    }
+    
+    // UPDATED: Form submission (removed password and email)
+    document.getElementById('adminForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Processing...';
+        
+        const formData = {
+            action: isEditMode ? 'update' : 'create',
+            username: document.getElementById('username').value.trim(),
+            mobile_number: document.getElementById('mobile_number').value.trim(),
+            area_name: document.getElementById('area_name').value.trim()
+            // REMOVED: password, email
+        };
+        
+        if (isEditMode) {
+            formData.area_admin_id = document.getElementById('area_admin_id').value;
+        }
+        
+        try {
+            const response = await fetch('api/area_admin_crud_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                closeModal();
+                loadAreaAdmins();
+                alert(result.message + '\n\n📱 Mobile: ' + formData.mobile_number + '\n🔐 Login Method: OTP only');
+            } else {
+                alert(result.message || 'Operation failed');
+            }
+        } catch (error) {
+            alert('Network error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = isEditMode ? 'Update Area Admin' : 'Create Area Admin';
+        }
+    });
+    
+    // Super Admin Profile Functions (No changes - Super Admin still uses password)
+    async function openProfileModal() {
+        try {
+            const response = await fetch('api/admin_auth_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'get_profile' })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                document.getElementById('profile_username').value = result.data.username;
+                document.getElementById('profile_email').value = result.data.email || '';
+                document.getElementById('current_password').value = '';
+                document.getElementById('new_password').value = '';
+                document.getElementById('confirm_password').value = '';
+                
+                document.getElementById('profileModal').classList.add('active');
+            } else {
+                alert('Failed to load profile');
+            }
+        } catch (error) {
+            alert('Error loading profile');
+        }
+    }
+    
+    function closeProfileModal() {
+        document.getElementById('profileModal').classList.remove('active');
+        document.getElementById('profileForm').reset();
+    }
+    
+    document.getElementById('profileForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const newPassword = document.getElementById('new_password').value;
+        const confirmPassword = document.getElementById('confirm_password').value;
+        const currentPassword = document.getElementById('current_password').value;
+        
+        if (newPassword && newPassword !== confirmPassword) {
+            alert('New passwords do not match');
+            return;
+        }
+        
+        if (newPassword && !currentPassword) {
+            alert('Please enter your current password to change password');
+            return;
+        }
+        
+        const submitBtn = document.getElementById('profileSubmitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Updating...';
+        
+        const formData = {
+            action: 'update_profile',
+            username: document.getElementById('profile_username').value,
+            email: document.getElementById('profile_email').value,
+            current_password: currentPassword,
+            new_password: newPassword
+        };
+        
+        try {
+            const response = await fetch('api/admin_auth_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Profile updated successfully!');
+                closeProfileModal();
+                location.reload();
+            } else {
+                alert(result.message || 'Failed to update profile');
+            }
+        } catch (error) {
+            alert('Network error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Update Profile';
+        }
+    });
+    
+    // Pincode Management Functions (No changes)
+    async function managePincodes(adminId, adminName) {
+        currentPincodeAdminId = adminId;
+        document.getElementById('pincodeAdminName').textContent = adminName;
+        document.getElementById('pincode_area_admin_id').value = adminId;
+        document.getElementById('new_pincode').value = '';
+        document.getElementById('bulk_pincodes').value = '';
+        
+        document.getElementById('pincodeModal').classList.add('active');
+        loadPincodes(adminId);
+    }
+    
+    function closePincodeModal() {
+        document.getElementById('pincodeModal').classList.remove('active');
+    }
+    
+    async function loadPincodes(adminId) {
+        try {
+            const response = await fetch('api/pincode_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'get_pincodes',
+                    area_admin_id: adminId
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                displayPincodes(result.data);
+            } else {
+                document.getElementById('pincodesList').innerHTML = 
+                    '<div style="padding: 20px; text-align: center; color: #999;">Failed to load pincodes</div>';
+            }
+        } catch (error) {
+            document.getElementById('pincodesList').innerHTML = 
+                    '<div style="padding: 20px; text-align: center; color: #999;">Error loading pincodes</div>';
+        }
+    }
+    
+    function displayPincodes(pincodes) {
+        const container = document.getElementById('pincodesList');
+        document.getElementById('pincodeCount').textContent = pincodes.length;
+        
+        if (pincodes.length === 0) {
+            container.innerHTML = '<div style="padding: 20px; text-align: center; color: #999;">No pincodes assigned yet</div>';
+            return;
+        }
+        
+        container.innerHTML = '<table style="width: 100%; border-collapse: collapse;">' +
+            '<thead style="background: #f8f9fa;">' +
+            '<tr>' +
+            '<th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Pincode</th>' +
+            '<th style="padding: 12px; text-align: left; border-bottom: 2px solid #dee2e6;">Assigned On</th>' +
+            '<th style="padding: 12px; text-align: center; border-bottom: 2px solid #dee2e6;">Action</th>' +
+            '</tr>' +
+            '</thead>' +
+            '<tbody>' +
+            pincodes.map(p => `
+                <tr style="border-bottom: 1px solid #dee2e6;">
+                    <td style="padding: 12px; font-weight: 600;">${p.pincode}</td>
+                    <td style="padding: 12px;">${new Date(p.created_at).toLocaleDateString()}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <button class="btn btn-danger btn-small" onclick="removePincode(${p.id})">Remove</button>
+                    </td>
+                </tr>
+            `).join('') +
+            '</tbody></table>';
+    }
+    
+    document.getElementById('pincodeForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const adminId = document.getElementById('pincode_area_admin_id').value;
+        const pincode = document.getElementById('new_pincode').value.trim();
+        
+        if (!pincode || pincode.length !== 6) {
+            alert('Please enter a valid 6-digit pincode');
+            return;
+        }
+        
+        try {
+            const response = await fetch('api/pincode_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'assign_pincode',
+                    area_admin_id: adminId,
+                    pincode: pincode
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                document.getElementById('new_pincode').value = '';
+                loadPincodes(adminId);
+                alert('Pincode assigned successfully');
+            } else {
+                alert(result.message || 'Failed to assign pincode');
+            }
+        } catch (error) {
+            alert('Network error');
+        }
+    });
+    
+    async function addBulkPincodes() {
+        const adminId = document.getElementById('pincode_area_admin_id').value;
+        const bulkText = document.getElementById('bulk_pincodes').value.trim();
+        
+        if (!bulkText) {
+            alert('Please enter pincodes');
+            return;
+        }
+        
+        const pincodes = bulkText
+            .split(/[\n,]/)
+            .map(p => p.trim())
+            .filter(p => p.length === 6 && /^[0-9]{6}$/.test(p));
+        
+        if (pincodes.length === 0) {
+            alert('No valid pincodes found. Please enter 6-digit pincodes.');
+            return;
+        }
+        
+        try {
+            const response = await fetch('api/pincode_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'assign_multiple_pincodes',
+                    area_admin_id: adminId,
+                    pincodes: pincodes
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                document.getElementById('bulk_pincodes').value = '';
+                loadPincodes(adminId);
+                
+                let message = result.message;
+                if (result.failed_count > 0) {
+                    message += '\n\nFailed pincodes:\n';
+                    result.failed_pincodes.forEach(f => {
+                        message += `${f.pincode}: ${f.reason}\n`;
+                    });
+                }
+                alert(message);
+            } else {
+                alert(result.message || 'Failed to assign pincodes');
+            }
+        } catch (error) {
+            alert('Network error');
+        }
+    }
+    
+    async function removePincode(pincodeId) {
+        if (!confirm('Are you sure you want to remove this pincode assignment?')) {
+            return;
+        }
+        
+        try {
+            const response = await fetch('api/pincode_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'remove_pincode',
+                    pincode_id: pincodeId
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                loadPincodes(currentPincodeAdminId);
+                alert('Pincode removed successfully');
+            } else {
+                alert(result.message || 'Failed to remove pincode');
+            }
+        } catch (error) {
+            alert('Network error');
+        }
+    }
+    
+    async function logout() {
+        try {
+            await fetch('api/admin_auth_api.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'logout' })
+            });
+            window.location.href = 'login.php';
+        } catch (error) {
+            window.location.href = 'login.php';
+        }
+    }
+    
+    // Search and filter
+    document.getElementById('searchInput').addEventListener('input', loadAreaAdmins);
+    document.getElementById('statusFilter').addEventListener('change', loadAreaAdmins);
+    
+    // Load on page load
+    loadAreaAdmins();
+</script>
+</body>
+</html>
