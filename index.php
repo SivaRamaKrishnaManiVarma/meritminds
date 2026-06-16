@@ -406,127 +406,165 @@
 
             <!-- Testimonial Cards Container -->
             <div class="testimonial-carousel" id="testimonialCarousel">
-<div class="video-testimonial-card">
-    <div class="student-photo-wrapper">
+                    <div class="video-testimonial-card has-video">
+                                <div class="student-photo-wrapper">
 
-        <!-- Image -->
-        <img src="assets/imgs/students/samatha.jpeg"
-             alt="Samatha Reddy"
-             class="student-photo">
+                                    <!-- Image -->
+                                    <img src="assets/imgs/students/samatha.jpeg"
+                                        alt="Samatha Reddy"
+                                        class="student-photo">
 
-        <!-- Video -->
-        <video class="student-video"
-               src="assets/imgs/students/vid_samatha.mp4"
-               playsinline
-               preload="metadata">
-        </video>
+                                    <!-- Video -->
+                                    <video class="student-video"
+                                        src="assets/imgs/students/vid_samatha.mp4"
+                                        playsinline
+                                        preload="metadata">
+                                    </video>
 
-        <!-- Play Icon -->
-        <div class="play-overlay">▶</div>
+                                    <!-- Play Icon -->
+                                    <div class="play-overlay">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                                        </svg>
+                                    </div>
 
-        <!-- Testimonial Content -->
-        <div class="testimonial-floating-box">
-            <div class="testimonial-header mb-2">
-                <h6 class="testimonial-title"
-                    style="color:#7d6ef3; font-weight:700; font-size:13px; margin-bottom:4px;">
-                    EXCELLENT EXPERIENCE
-                </h6>
-                <div class="testimonial-rating"
-                     style="color:#ffc107; font-size:14px;">
-                    ★★★★★
-                </div>
-            </div>
+                                    <!-- Testimonial Content -->
+                                    <div class="testimonial-floating-box">
+                                        <div class="testimonial-header mb-2">
+                                            <h6 class="testimonial-title"
+                                                style="color:#7d6ef3; font-weight:700; font-size:13px; margin-bottom:4px;">
+                                                EXCELLENT EXPERIENCE
+                                            </h6>
+                                            <div class="testimonial-rating"
+                                                style="color:#ffc107; font-size:14px;">
+                                                ★★★★★
+                                            </div>
+                                        </div>
 
-            <p class="testimonial-quote">
-                "I had an excellent experience, Rahul Sir on my side, everything including my VISA process went smoothly."
-            </p>
+                                        <p class="testimonial-quote">
+                                            "I had an excellent experience, Rahul Sir on my side, everything including my VISA process went smoothly."
+                                        </p>
 
-            <div class="testimonial-author-info">
-                <div>
-                    <h6 class="author-name">Samatha Reddy</h6>
-                    <p class="author-university" style="color:#7d6ef3;">
-                        University of Stirling
-                    </p>
-                </div>
-            </div>
-        </div>
+                                        <div class="testimonial-author-info">
+                                            <div>
+                                                <h6 class="author-name">Samatha Reddy</h6>
+                                                <p class="author-university" style="color:#7d6ef3;">
+                                                    University of Stirling
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-    </div>
-</div>
-<script>
-let userInteracted = false;
-
-document.querySelectorAll('.video-testimonial-card').forEach(card => {
-    const video = card.querySelector('.student-video');
-    const playOverlay = card.querySelector('.play-overlay');
-
-    // CLICK → unlock audio + play immediately
-    card.addEventListener('click', (e) => {
-        e.stopPropagation(); // prevent double triggers
-
-        userInteracted = true;
-
-        video.muted = false;
-        video.currentTime = 0;
-        video.play();
-
-        card.classList.add('video-playing');
-    });
-
-    // HOVER → play with sound (only after interaction)
-    card.addEventListener('mouseenter', () => {
-        if (!userInteracted) return;
-
-        video.muted = false;
-        video.currentTime = 0;
-        video.play();
-
-        card.classList.add('video-playing');
-    });
-
-    // LEAVE → stop and reset
-    card.addEventListener('mouseleave', () => {
-        video.pause();
-        video.currentTime = 0;
-        card.classList.remove('video-playing');
-    });
-
-    // SAFETY CLEANUP
-    video.addEventListener('pause', () => {
-        card.classList.remove('video-playing');
-    });
-
-    video.addEventListener('ended', () => {
-        card.classList.remove('video-playing');
-    });
-});
-</script>
-
+                                </div>
+                    </div>
+                         
 
             
-                    <!-- Card 1: Tanishq Kondru -->
-                <div class="video-testimonial-card">
-                    <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture6.jpg" alt="Tanishq Kondru" class="student-photo">
-                        
-                        <!-- Floating Content Box -->
-                        <div class="testimonial-floating-box">
-                            <div class="testimonial-header mb-2">
-                                <h6 class="testimonial-title" style="color:#5f5a07; font-weight:700; font-size:13px; margin-bottom:4px;">INCREDIBLY GRATEFUL</h6>
-                                <div class="testimonial-rating" style="color:#ffc107; font-size:14px;">★★★★★</div>
+                <!-- Card 2: Pallavi Rapolu -->
+            <div class="video-testimonial-card has-video">
+                <div class="student-photo-wrapper">
+
+                    <!-- Image -->
+                    <img src="assets/imgs/students/pallavi.jpeg"
+                        alt="Pallavi Rapolu"
+                        class="student-photo">
+
+                    <!-- Video -->
+                    <video class="student-video"
+                        src="assets/imgs/students/vid_pallavi.mp4"
+                        playsinline
+                        preload="metadata">
+                    </video>
+
+                    <!-- Play Icon -->
+                    <div class="play-overlay">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                        </svg>
+                    </div>
+
+                    <!-- Testimonial Content -->
+                    <div class="testimonial-floating-box">
+                        <div class="testimonial-header mb-2">
+                            <h6 class="testimonial-title"
+                                style="color:#5f5a07; font-weight:700; font-size:13px; margin-bottom:4px;">
+                                INCREDIBLY GRATEFUL
+                            </h6>
+                            <div class="testimonial-rating"
+                                style="color:#ffc107; font-size:14px;">
+                                ★★★★★
                             </div>
-                            <p class="testimonial-quote">"Incredibly grateful to MERIT MINDS OVERSEAS. Highly recommend for studying abroad."</p>
-                            <div class="testimonial-author-info">
-                                <div>
-                                    <h6 class="author-name">Tanishq Kondru</h6>
-                                    <p class="author-university" style="color:#5f5a07;">University of Minnesota</p>
-                                </div>
+                        </div>
+
+                        <p class="testimonial-quote">
+                            "Incredibly grateful to MERIT MINDS OVERSEAS. Highly recommend for studying abroad."
+                        </p>
+
+                        <div class="testimonial-author-info">
+                            <div>
+                                <h6 class="author-name">Pallavi Rapolu</h6>
+                                <p class="author-university" style="color:#5f5a07;">
+                                    The University of Law, Birmingham
+                                </p>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card 2: Salma Sultana -->
+                </div>
+            </div>
+              <!-- Card 3: Sampath Mathena -->
+                <div class="video-testimonial-card has-video">
+                    <div class="student-photo-wrapper">
+
+                        <!-- Image -->
+                        <img src="assets/imgs/students/sampath.jpeg"
+                            alt="Sampath Mathena"
+                            class="student-photo">
+
+                        <!-- Video -->
+                        <video class="student-video"
+                            src="assets/imgs/students/vid_sampath.mp4"
+                            playsinline
+                            preload="metadata">
+                        </video>
+
+                        <!-- Play Icon -->
+                        <div class="play-overlay">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+
+                        <!-- Testimonial Content -->
+                        <div class="testimonial-floating-box">
+                            <div class="testimonial-header mb-2">
+                                <h6 class="testimonial-title"
+                                    style="color:#239bca; font-weight:700; font-size:13px; margin-bottom:4px;">
+                                    FANTASTIC EXPERIENCE
+                                </h6>
+                                <div class="testimonial-rating"
+                                    style="color:#ffc107; font-size:14px;">
+                                    ★★★★★
+                                </div>
+                            </div>
+
+                            <p class="testimonial-quote">
+                                "Exceptional support throughout my study journey, from exam preparation to visa process approval."
+                            </p>
+
+                            <div class="testimonial-author-info">
+                                <div>
+                                    <h6 class="author-name">Sampath Mathena</h6>
+                                    <p class="author-university" style="color:#239bca;">
+                                        The University of Law, Birmingham
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- Card 3-4: Salma Sultana -->
                 <div class="video-testimonial-card">
                     <div class="student-photo-wrapper">
                         <img src="assets/imgs/picture3.jpg" alt="Salma Sultana" class="student-photo">
@@ -547,26 +585,7 @@ document.querySelectorAll('.video-testimonial-card').forEach(card => {
                     </div>
                 </div>
 
-                <!-- Card 3: Gopalakrishna Reddy -->
-                <div class="video-testimonial-card">
-                    <div class="student-photo-wrapper">
-                        <img src="assets/imgs/picture4.jpg" alt="Gopalakrishna Reddy Manukonda" class="student-photo">
-                        
-                        <div class="testimonial-floating-box">
-                            <div class="testimonial-header mb-2">
-                                <h6 class="testimonial-title" style="color:#239bca; font-weight:700; font-size:13px; margin-bottom:4px;">FANTASTIC EXPERIENCE</h6>
-                                <div class="testimonial-rating" style="color:#ffc107; font-size:14px;">★★★★★</div>
-                            </div>
-                            <p class="testimonial-quote">"Exceptional support throughout my study journey, from exam preparation to visa process approval."</p>
-                            <div class="testimonial-author-info">
-                                <div>
-                                    <h6 class="author-name">Gopalakrishna Reddy Manukonda</h6>
-                                    <p class="author-university" style="color:#239bca;">University of Florida</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
 
                 <!-- Card 4: Lakshma Reddy -->
                 <div class="video-testimonial-card">
@@ -2062,6 +2081,61 @@ document.querySelectorAll('.video-testimonial-card').forEach(card => {
         }
     }
 </style>
+    <script>
+                            document.querySelectorAll('.video-testimonial-card').forEach(card => {
+                                const video = card.querySelector('.student-video');
+                                if (!video) return; // Skip cards without videos to avoid console errors
+
+                                const playOverlay = card.querySelector('.play-overlay');
+
+                                // CLICK → unmute and play from start
+                                card.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+
+                                    video.muted = false;
+                                    video.currentTime = 0;
+                                    const playPromise = video.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.catch(error => {
+                                            console.log("Audio play failed/prevented:", error);
+                                        });
+                                    }
+
+                                    card.classList.add('video-playing');
+                                });
+
+                                // HOVER → play muted immediately
+                                card.addEventListener('mouseenter', () => {
+                                    video.muted = true;
+                                    video.currentTime = 0;
+                                    const playPromise = video.play();
+                                    if (playPromise !== undefined) {
+                                        playPromise.catch(error => {
+                                            console.log("Muted autoplay failed/prevented:", error);
+                                        });
+                                    }
+
+                                    card.classList.add('video-playing');
+                                });
+
+                                // LEAVE → stop and reset
+                                card.addEventListener('mouseleave', () => {
+                                    video.pause();
+                                    video.currentTime = 0;
+                                    video.muted = true;
+                                    card.classList.remove('video-playing');
+                                });
+
+                                // SAFETY CLEANUP
+                                video.addEventListener('pause', () => {
+                                    card.classList.remove('video-playing');
+                                });
+
+                                video.addEventListener('ended', () => {
+                                    card.classList.remove('video-playing');
+                                });
+                            });
+                            </script>
 
 
 <script>
